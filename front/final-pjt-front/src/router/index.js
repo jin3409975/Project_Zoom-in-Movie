@@ -1,22 +1,50 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import MainView from '@/views/MainView.vue'
+import CategoryView from '@/views/CategoryView.vue'
+import LoginSignUpView from '@/views/LoginSignUpView.vue'
+import MovieDetailView from '@/views/MovieDetailView.vue'
+import MyPageView from '@/views/MyPageView.vue'
+import RecommendChoiceView from '@/views/RecommendChoiceView.vue'
+import RecommendView from '@/views/RecommendView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'MainView',
+      component: MainView
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
+      path: '/category',
+      name: 'CategoryView',
+      component: CategoryView
+    },
+    {
+      path: '/account',
+      name: 'LoginSignUpView',
+      component: LoginSignUpView
+    },
+    {
+      path: '/movie',
+      name: 'MovieDetailView',
+      component: MovieDetailView
+    },
+    {
+      path: '/mypage',
+      name: 'MyPageView',
+      component: MyPageView
+    },
+    {
+      path: '/choice',
+      name: 'RecommendChoiceView',
+      component: RecommendChoiceView
+    },
+    {
+      path: '/recommend',
+      name: 'RecommendView',
+      component: RecommendView
+    },
   ]
 })
 
