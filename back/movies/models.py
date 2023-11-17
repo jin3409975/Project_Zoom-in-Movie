@@ -3,7 +3,8 @@ from django.conf import settings
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=50)\
+    genre_id = models.IntegerField(primary_key=True)
+    genre_name = models.CharField(max_length=20)
     
     
 class Actor(models.Model):
@@ -11,6 +12,7 @@ class Actor(models.Model):
 
 
 class Movie(models.Model):
+    movie_id = models.TextField()
     title = models.CharField(max_length=100)
     release_date = models.DateTimeField()
     content = models.TextField()
@@ -28,9 +30,10 @@ class Movie(models.Model):
 
 
 class Comment(models.Model):
-    content = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
