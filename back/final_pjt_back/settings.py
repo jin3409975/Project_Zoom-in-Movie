@@ -63,6 +63,13 @@ REST_FRAMEWORK = {
     ],
 }
 
+ # 특정 origin의 요청만 허용
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5173',
+    'http://localhost:5173',
+]
+
+
 
 
 MIDDLEWARE = [
