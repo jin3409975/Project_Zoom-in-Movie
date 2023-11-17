@@ -13,15 +13,20 @@ class Actor(models.Model):
 
 class Movie(models.Model):
     movie_id = models.TextField()
-    title = models.CharField(max_length=100)
-    release_date = models.DateTimeField()
-    content = models.TextField()
+    title = models.TextField()
+    original_title = models.TextField()
+    overview = models.TextField()
+    poster_path = models.TextField()
     rating = models.FloatField()
-    poster_path = models.CharField(max_length=200)
+    release_date = models.TextField()
+    runtime = models.IntegerField()
+    popularity = models.FloatField()
+    adult = models.BooleanField()
+    backdrop_path = models.CharField(max_length=500)
     like_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name='like_movies'
     )
-    genre = models.ManyToManyField(
+    genres = models.ManyToManyField(
         Genre, related_name='genre_movie'
     )
     actors = models.ManyToManyField(

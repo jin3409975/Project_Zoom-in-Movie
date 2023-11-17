@@ -6,19 +6,14 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.conf import settings
 from .models import Movie, Comment, Genre, Actor
 from .serializers import MovieListSerializer, CommentListSerializer
-import requests
 
 
 @api_view(['GET', 'POST'])
 def movie_list(request):
     if request.method == 'GET':
-        api_key = settings.API_KEY
-        url = f'https://api.themoviedb.org/3/movie/popular?api_key={api_key}&language=ko'
-        response = requests.get(url).json()
-        return Response(response)
-        # movies = Movie.objects.all()
-        # seralizer = MovieListSerializer(movies, many=True)
-        # return Response(seralizer.data)
+        movies = Movie.objects.all()
+        seralizer = MovieListSerializer(movies, many=True)
+        return Response(seralizer.data)
         
         
 @api_view(['GET'])
@@ -35,7 +30,7 @@ def comment_list(request):
     serializer = CommentListSerializer(comments, many=True)
     return Response(serializer.data)
 
-    
+
 @api_view(['POST'])
 def comment_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
