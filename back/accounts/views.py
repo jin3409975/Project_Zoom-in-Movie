@@ -13,7 +13,7 @@ def login(request):
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect('articles:index')
+            return redirect('movies:index')
     else:   # GET
         form = AuthenticationForm()
     context = {
@@ -25,4 +25,4 @@ def login(request):
 @require_POST
 def logout(request):
     auth_logout(request)
-    return redirect('articles:index')
+    return redirect('movies:index')
