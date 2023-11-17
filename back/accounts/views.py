@@ -1,10 +1,10 @@
 from rest_framework.response import Response
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.views.decorators.http import require_http_methods, require_POST
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from django.contrib.auth.decorators import login_required
+from rest_framework.decorators import api_view,permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
@@ -38,7 +38,7 @@ def signup(request):
 
 
 
-@require_http_methods(['GET', 'POST'])   # GET 또는 POST로만 호출 가능
+@api_view(['GET', 'POST'])   # GET 또는 POST로만 호출 가능
 def login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
@@ -54,7 +54,15 @@ def login(request):
 
 
 
-@require_POST
+@api_view(['POST'])
 def logout(request):
     auth_logout(request)
     return redirect('movies:index')
+
+
+@login_required
+def delete(request):
+    if request.user.is_authenticated:
+        request.user.delete()
+        auth_logout(request)
+    return redirect('articles:index')
