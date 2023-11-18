@@ -90,6 +90,21 @@ def my_movie_like(request, my_pk):
   return Response(data)
 
 
+@api_view(['POST'])
+def like_movie_users(request, my_pk):
+  users = []
+  user = get_object_or_404(get_user_model(), pk=my_pk)
+  movies = user.like_movies.all()
+  for movie in movies:
+    movie = get_object_or_404(Movie, pk=movie.pk)
+    serializer = MovieSerializer(movie)
+    for user in serializer.data.get('like_users'):
+      if user not in users:
+        users.append(user)
+
+  return Response(users)
+
+
 
 @api_view(['post'])
 def user_like_movies(request, user_pk):
