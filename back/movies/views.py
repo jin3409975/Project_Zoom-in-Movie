@@ -8,6 +8,8 @@ from django.conf import settings
 from .models import Movie, Comment, Genre, Actor
 from .serializers import MovieListSerializer, CommentListSerializer
 from accounts.serializers import UserSerializer
+from random import sample
+
 
 
 
@@ -84,7 +86,7 @@ def my_movie_like(request, my_pk):
   movies = me.like_movies.all()
   for movie in movies:
     movie = get_object_or_404(Movie, pk=movie.id)
-    serializer = MovieSerializer(movie)
+    serializer = MovieListSerializer(movie)
     data.append(serializer.data)
   
   return Response(data)
@@ -97,7 +99,7 @@ def like_movie_users(request, my_pk):
   movies = user.like_movies.all()
   for movie in movies:
     movie = get_object_or_404(Movie, pk=movie.pk)
-    serializer = MovieSerializer(movie)
+    serializer = MovieListSerializer(movie)
     for user in serializer.data.get('like_users'):
       if user not in users:
         users.append(user)
@@ -124,8 +126,8 @@ def user_like_movies(request, user_pk):
       like_movies.append(movie)
     if movie.pk in review_movie_id:
       review_movies.append(movie)
-  serializers = MovieSerializer(like_movies, many=True)
-  review_serializers = MovieSerializer(review_movies, many=True)
+  serializers = MovieListSerializer(like_movies, many=True)
+  review_serializers = MovieListSerializer(review_movies, many=True)
   return Response([serializers.data, review_serializers.data])
 
 
@@ -173,16 +175,16 @@ def recommended(request):
                       recommendations_list.add(movie)
                       break
       recommendations = sample(recommendations_list, 20)
-      serializer = MovieSerializer(recommendations)
+      serializer = MovieListSerializer(recommendations)
       # liked = True
     else:
       movies = get_list_or_404(Movie)
       recommendations = sample(movies, 20)
-      serializer = MovieSerializer(recommendations, many=True)
+      serializer = MovieListSerializer(recommendations, many=True)
       # liked = False
 
     return Response(serializer.data)
   else:
     movies = get_list_or_404(Movie)
     recommendations = sample(movies, 10)
-    serializer = MovieSerializer(recommendations)
+    serializer = MovieListSerializer(recommendations)
