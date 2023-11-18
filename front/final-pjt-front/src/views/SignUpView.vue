@@ -1,5 +1,5 @@
 <template>
-    <div class="background">
+    <div class="background backSize">
         <SignUp class="signupComponent"/>
     </div>
 </template>
@@ -9,11 +9,13 @@ import SignUp from '../components/SignUp.vue';
 </script>
 
 <style scoped>
+.backSize {
+  margin: 7vh 0 0 0;
+  height: 93vh;
+}
 .background {
     position: relative;
     background-image: url(https://an2-img.amz.wtchn.net/image/v2/v_rtGmsGmmSGuScg0hC76g.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZNE5Ea3hOVGN4T1RJM05UQTVOVGs0TXlKOS5mRjlhcmYwZWNJd2cyNUl4YnBfZkZyV0E5UmpkMnhLdmVEUnhUUU1jUXN3);
-    margin: 7vh 0 0 0;
-    height: 93vh;
     background-size: cover;
     background-position: center;
     display: flex;
