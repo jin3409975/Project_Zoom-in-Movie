@@ -188,3 +188,11 @@ def recommended(request):
     movies = get_list_or_404(Movie)
     recommendations = sample(movies, 10)
     serializer = MovieSerializer(recommendations)
+
+
+@api_view(['GET'])
+def current_popularity(request):
+  if request.method == 'GET':
+    movies = Movie.objects.order_by('-popularity')[:30]
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
