@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from .models import Movie, Comment, Genre, Actor
-from .serializers import MovieListSerializer, CommentListSerializer
+from .serializers import MovieListSerializer, CommentListSerializer, MovieSerializer
 from accounts.serializers import UserSerializer
 from random import sample
 
@@ -86,7 +86,7 @@ def my_movie_like(request, my_pk):
   movies = me.like_movies.all()
   for movie in movies:
     movie = get_object_or_404(Movie, pk=movie.id)
-    serializer = MovieListSerializer(movie)
+    serializer = MovieSerializer(movie)
     data.append(serializer.data)
   
   return Response(data)
@@ -99,7 +99,7 @@ def like_movie_users(request, my_pk):
   movies = user.like_movies.all()
   for movie in movies:
     movie = get_object_or_404(Movie, pk=movie.pk)
-    serializer = MovieListSerializer(movie)
+    serializer = MovieSerializer(movie)
     for user in serializer.data.get('like_users'):
       if user not in users:
         users.append(user)
@@ -126,8 +126,8 @@ def user_like_movies(request, user_pk):
       like_movies.append(movie)
     if movie.pk in review_movie_id:
       review_movies.append(movie)
-  serializers = MovieListSerializer(like_movies, many=True)
-  review_serializers = MovieListSerializer(review_movies, many=True)
+  serializers = MovieSerializer(like_movies, many=True)
+  review_serializers = MovieSerializer(review_movies, many=True)
   return Response([serializers.data, review_serializers.data])
 
 
@@ -175,16 +175,16 @@ def recommended(request):
                       recommendations_list.add(movie)
                       break
       recommendations = sample(recommendations_list, 20)
-      serializer = MovieListSerializer(recommendations)
+      serializer = MovieSerializer(recommendations)
       # liked = True
     else:
       movies = get_list_or_404(Movie)
       recommendations = sample(movies, 20)
-      serializer = MovieListSerializer(recommendations, many=True)
+      serializer = MovieSerializer(recommendations, many=True)
       # liked = False
 
     return Response(serializer.data)
   else:
     movies = get_list_or_404(Movie)
     recommendations = sample(movies, 10)
-    serializer = MovieListSerializer(recommendations)
+    serializer = MovieSerializer(recommendations)
