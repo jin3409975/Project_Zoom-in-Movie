@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainView from '@/views/MainView.vue'
 import CategoryView from '@/views/CategoryView.vue'
-import LoginSignUpView from '@/views/LoginSignUpView.vue'
+import SignUpView from '@/views/SignUpView.vue'
+import LoginView from '@/views/LoginView.vue'
 import MovieDetailView from '@/views/MovieDetailView.vue'
 import MyPageView from '@/views/MyPageView.vue'
 import RecommendChoiceView from '@/views/RecommendChoiceView.vue'
@@ -21,9 +22,14 @@ const router = createRouter({
       component: CategoryView
     },
     {
-      path: '/account',
-      name: 'LoginSignUpView',
-      component: LoginSignUpView
+      path: '/signup',
+      name: 'SignUpView',
+      component: SignUpView
+    },
+    {
+      path: '/login',
+      name: 'LoginView',
+      component: LoginView
     },
     {
       path: '/movie',

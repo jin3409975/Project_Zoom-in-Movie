@@ -1,6 +1,16 @@
 <template>
     <div>
-        SignUp
+        <div>
+            <h1 class="loginText">로그인</h1>
+        </div>
+            <form @submit.prevent="" class="loginForm">
+                <input type="text" placeholder="아이디">
+                <input type="text" placeholder="비밀번호">
+                <button>로그인</button>
+            </form>
+        <div>
+
+        </div>
     </div>
 </template>
 
@@ -9,5 +19,58 @@
 </script>
 
 <style scoped>
+.loginText {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    color: white;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm input {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  width: 30vh;
+  color: #000000;
+  font-size: 16px;
+  padding: 10px; /* 내부 여백을 조절하세요 */
+  border-radius: 4px;
+  margin-bottom: 10px; /* 입력란 간의 간격을 조절하세요 */
+}
+
+.loginForm input::placeholder {
+    font-size: 12px; /* 플레이스홀더의 폰트 크기 */
+    letter-spacing: -0.5px; /* 플레이스홀더의 글자 간격 */
+    font-weight: 500;
+    color: #BEBAB7; /* 플레이스홀더의 색상 및 투명도 */
+    padding-left: 1vh;
+}
+
+.loginForm button {
+    position: relative;
+    background-color: rgb(248, 47, 98, 0.3);
+    color: white; /* 텍스트 색상은 흰색 */
+    font-weight: 700; /* 굵은 폰트 */
+    text-align: center;
+    letter-spacing: -0.1px;
+    width: 100%;
+    border-radius: 40px;
+    font-size: 16px;
+    height: 4.5vh;
+    margin: 1.5vh 0;
+    border: none; /* 테두리 없음 */
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s; /* 마우스 호버 시 배경색 변경을 위한 트랜지션 */
+}
+
+.loginForm button:hover {
+    background-color: rgba(255, 182, 193, 0.5); /* 페이스트 핑크색 */
+}
+
 
 </style>

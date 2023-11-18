@@ -6,7 +6,9 @@
       |
         <RouterLink :to="{ name: 'CategoryView' }">category</RouterLink>
       |
-        <RouterLink :to="{ name: 'LoginSignUpView' }">account</RouterLink>
+        <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
+      |
+        <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
       |
         <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
       |
@@ -21,9 +23,9 @@
     </header>
 
     <RouterView class="router-view"/>
-
     <footer class='footer'>
-      팀명: 일단 넘겨, 맏이: 이지은(아이유), 막내: 차현철(박항서)
+      고객센터(이용 및 결제 문의)  ssafy10th@ssafy.com • 02-515-9985 (유료) / 제휴 및 대외 협력  https://watcha.team/contact
+      주식회사 왓챠 / 대표 박태훈 / 서울특별시 서초구 강남대로 343 신덕빌딩 3층 / 사업자등록번호 211-88-66013 / 통신판매업 신고번호 제 2019-서울서초-0965호 / 호스팅 서비스 제공자 아마존웹서비시즈코리아 유한회사 / 대표번호 02-515-9985 / 이용약관 / 개인정보 처리 방침 / 청소년 보호정책
     </footer>
   </div>
 </template>
@@ -39,7 +41,7 @@ import ProFile from './components/ProFile.vue';
 .nav {
   background-color: #333; /* 나브바의 배경색 */
   color: white; /* 나브바 내 텍스트 색상 */
-  height: 50px; /* 나브바의 높이 */
+  height: 7vh; /* 나브바의 높이 */
   display: flex; /* 플렉스박스 레이아웃 사용 */
   justify-content: space-between; /* 요소들을 양 끝에 배치 */
   align-items: center; /* 세로 방향에서 중앙 정렬 */
@@ -50,11 +52,12 @@ import ProFile from './components/ProFile.vue';
   width: 100%; /* 전체 너비 */
   z-index: 1000; /* 다른 요소들보다 상위에 위치 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+
 }
 
 .router-view {
-  margin-top: 50px; /* 상단 나브바 높이에 맞춤 */
-  margin-bottom: 50px; /* 하단 푸터 높이에 맞춤 */
+  margin-top: 7vh; /* 상단 나브바 높이에 맞춤 */
+  /* margin-bottom: 50px; */
 }
 
 
@@ -69,14 +72,14 @@ nav a:hover {
 }
 
 .footer {
-  background-color: #f2f2f2; /* 푸터의 배경색 */
-  color: #333; /* 텍스트 색상 */
-  text-align: center; /* 텍스트를 중앙 정렬 */
-  padding: 20px 0; /* 상하 패딩 */
-  font-size: 14px; /* 폰트 크기 */
-  border-top: 1px solid #e7e7e7; /* 상단 테두리 */
-  position: fixed; /* 필요에 따라 위치 조정 */
-  bottom: 0; /* 페이지 하단에 고정 */
-  width: 100%; /* 너비 */
+  color: #f2f2f2;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 8vh;
+  z-index: 999;
 }
 </style>
