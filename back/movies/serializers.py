@@ -6,6 +6,7 @@ class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = '__all__'
+        read_only_fields = ('like_movies', 'like_users',)
         
         
 class CommentListSerializer(serializers.ModelSerializer):
