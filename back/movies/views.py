@@ -80,6 +80,18 @@ def movie_like(request, my_pk, movie_id):
 
 
 @api_view(['POST'])
+def is_liked(request, my_pk, movie_id):
+  movie = get_object_or_404(Movie, movie_id=movie_id)
+  me = get_object_or_404(get_user_model(), pk=my_pk)
+  if me.like_movies.filter(pk=movie.pk).exists():
+      liking = True
+  else:
+      liking = False
+  return Response(liking)
+
+
+
+@api_view(['POST'])
 def my_movie_like(request, my_pk):
   me = get_object_or_404(get_user_model(), pk=my_pk)
   data = []
