@@ -91,6 +91,29 @@ def my_movie_like(request, my_pk):
 
 
 
+@api_view(['post'])
+def user_like_movies(request, user_pk):
+  like_movies_id = request.data.get('like_movies')
+  review_ids = request.data.get('reviews')
+  movies = Movie.objects.all()
+
+  review_movie_id = []
+  for review_id in review_ids:
+    review = Review.objects.get(pk=review_id)
+    review_movie_id.append(review.movie_id)
+
+  review_movies = []
+  like_movies = []
+  for movie in movies:
+    if movie.pk in like_movies_id:
+      like_movies.append(movie)
+    if movie.pk in review_movie_id:
+      review_movies.append(movie)
+  serializers = MovieSerializer(like_movies, many=True)
+  review_serializers = MovieSerializer(review_movies, many=True)
+  return Response([serializers.data, review_serializers.data])
+
+
 @api_view(['POST'])
 def users_info(request):
   users = request.data.get('users')
@@ -104,3 +127,7 @@ def users_info(request):
               movies.append(movie)
   
   return Response(movies)
+
+
+
+
