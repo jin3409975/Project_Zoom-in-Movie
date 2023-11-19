@@ -1,18 +1,21 @@
 <template>
     <div class="mainBack backSize">
         <!-- 케루젤 -->
-        <div id="carouselExampleIndicators" class="carousel slide carouselSize">
+        <div id="carouselExampleIndicators" class="carousel slide carouselSize" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
+                <div class="carousel-item active" data-bs-interval="4500">
                 <img src="https://occ-0-988-993.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABRB8wiQJXy6Ecwac6ye3koG50Hx36a5ljm_e6o4BXnl_becinwzUH9HZvVWYRHpeRAdPLZcYkYlVI0KxHi7rzQoJTpoV2H_9BHts.webp?r=6df" class="d-block w-100 rounded" alt="#">
                 </div>
-                <div class="carousel-item active">
+                <div class="carousel-item" data-bs-interval="4500">
                 <img src="https://occ-0-988-993.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABWVW0OpxSD0EVQlMznHowIIKBSSgL2BHrse2laXLGrb4zeLBFP4UmOY3I874f3gPROtcUp8BIXFxCrDgJbZAwxFQhZAW2hBVeds.webp?r=c4c" class="d-block w-100 rounded" alt="#">
+                </div>
+                <div class="carousel-item" data-bs-interval="4500">
+                <img src="https://image.tmdb.org/t/p/w500/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg" class="d-block w-100 rounded" alt="#">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -85,6 +88,10 @@ import MovieCard from '../components/MovieCard.vue';
 </script>
 
 <style scoped>
+.carousel-item {
+  transition: transform 0.5s ease;
+}
+
 .mainBack {
     background-color: #141414;
 }
