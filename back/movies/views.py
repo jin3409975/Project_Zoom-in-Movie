@@ -4,7 +4,6 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.contrib.auth import get_user_model
-from django.conf import settings
 from .models import Movie, Comment, Genre, Actor
 from .serializers import MovieListSerializer, CommentListSerializer, MovieSerializer
 from accounts.serializers import UserSerializer
@@ -12,7 +11,7 @@ from random import sample
 
 
 
-
+### 영화 목록 ###
 @api_view(['GET', 'POST'])
 def movie_list(request):
     if request.method == 'GET':
@@ -20,7 +19,8 @@ def movie_list(request):
         seralizer = MovieListSerializer(movies, many=True)
         return Response(seralizer.data)
         
-        
+
+### 영화 상세 ###        
 @api_view(['GET'])
 def movie_detail(request, movie_pk):
     if request.method == 'GET':
@@ -28,7 +28,8 @@ def movie_detail(request, movie_pk):
         serializer = MovieListSerializer(movie)
         return Response(serializer.data)
             
-        
+
+### 댓글 목록 ###        
 @api_view(['GET'])
 def comment_list(request):
     comments = Comment.objects.all()
@@ -36,6 +37,7 @@ def comment_list(request):
     return Response(serializer.data)
 
 
+### 댓글 생성 ###
 @api_view(['POST'])
 def comment_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
@@ -45,7 +47,8 @@ def comment_create(request, movie_pk):
             serializer.save(movie=movie, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    
+
+### 댓글 조회, 수정, 삭제 ###    
 @api_view(['GET', 'DELETE', 'PUT'])
 def comment_detail(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
@@ -66,7 +69,6 @@ def comment_detail(request, comment_pk):
 
 
 ### 영화 추천 알고리즘 ###
-
 @api_view(['POST'])
 def recommend(request):
   favorite_movies = Movie.objects.all().order_by('-rating')[:30]
@@ -110,51 +112,11 @@ def recommend(request):
     serializer_4 = MovieSerializer(recommendations, many=True)
     return Response([serializer_1.data, serializer_2.data, serializer_3.data, serializer_4.data])
   else:
-    serializer3 = MovieSerializer(users_movies, many=True)
+    serializer_3 = MovieSerializer(users_movies, many=True)
     return Response([serializer_1.data, serializer_2.data, serializer_3.data, []])
 
-  
-  # # 리뷰 기반 장르 추천
-  # users_movies = set()
 
-  # like_movies = request.data.get('like_movies')
-  
-  # movies = get_list_or_404(Movie)
-  # len_movies = len(movies)
-  # reviews = Review.objects.all()
-  # for review in reviews:
-  #   movie = Movie.objects.get(pk=review.movie_id)
-  #   if not movie in users_movies and movie.pk not in like_movies:
-  #     users_movies.add(movie)
-  # if users_movies:
-  #   users_movies = list(users_movies)
-  #   serializer = MovieSerializer(users_movies[0])
-  #   genre = serializer.data.get('genres')[0]
-    
-  #   idx = 1
-  #   users_movies = set(users_movies)
-  #   while len(users_movies) < 30 and idx <= len_movies:
-  #     try:
-  #       movie = Movie.objects.get(pk=idx)
-  #       ser = MovieSerializer(movie)
-  #       if ser.data.get('genres', False):
-  #         if ser.data.get('genres')[0] == genre and movie.pk not in users_movies:
-  #           users_movies.add(movie)
-  #       idx += 1
-  #     except:
-  #       idx += 1
-  #     if idx == len_movies:
-  #       latest_movies = Movie.objects.all().order_by('vote_count')
-  #       while len(users_movies) < 30:
-  #          users_movies.add(latest_movies.pop())
-  #       users_movies = list(users_movies)
-  # else:
-  #   users_movies = Movie.objects.all().order_by('-vote_count')[:30]
-
-
-
-
-
+### 영화 좋아요 ###
 @api_view(['POST'])
 def movie_like(request, my_pk, movie_id):
   movie = get_object_or_404(Movie, movie_id=movie_id)
@@ -170,6 +132,7 @@ def movie_like(request, my_pk, movie_id):
   return Response(liking)
 
 
+### 좋아요 누른 영화 ##
 @api_view(['POST'])
 def is_liked(request, my_pk, movie_id):
   movie = get_object_or_404(Movie, movie_id=movie_id)
@@ -181,7 +144,7 @@ def is_liked(request, my_pk, movie_id):
   return Response(liking)
 
 
-
+### 해당 사용자가 좋아요 누른 영화 ###
 @api_view(['POST'])
 def my_movie_like(request, my_pk):
   me = get_object_or_404(get_user_model(), pk=my_pk)
@@ -195,6 +158,7 @@ def my_movie_like(request, my_pk):
   return Response(data)
 
 
+### 해당 영화에 좋아요 누른 사용자들 ###
 @api_view(['POST'])
 def like_movie_users(request, my_pk):
   users = []
@@ -210,30 +174,31 @@ def like_movie_users(request, my_pk):
   return Response(users)
 
 
-
+### 해당 사용자가 좋아요 누른 영화들 ###
 @api_view(['post'])
 def user_like_movies(request, user_pk):
   like_movies_id = request.data.get('like_movies')
-  review_ids = request.data.get('reviews')
+  comment_ids = request.data.get('comments')
   movies = Movie.objects.all()
 
-  review_movie_id = []
-  for review_id in review_ids:
-    review = Review.objects.get(pk=review_id)
-    review_movie_id.append(review.movie_id)
+  comment_movie_id = []
+  for comment_id in comment_ids:
+    comment =Comment.objects.get(pk=comment_id)
+    comment_movie_id.append(comment.movie_id)
 
-  review_movies = []
+  comment_movies = []
   like_movies = []
   for movie in movies:
     if movie.pk in like_movies_id:
       like_movies.append(movie)
-    if movie.pk in review_movie_id:
-      review_movies.append(movie)
+    if movie.pk in comment_movie_id:
+      comment_movies.append(movie)
   serializers = MovieSerializer(like_movies, many=True)
-  review_serializers = MovieSerializer(review_movies, many=True)
-  return Response([serializers.data, review_serializers.data])
+  comment_serializers = MovieSerializer(comment_movies, many=True)
+  return Response([serializers.data, comment_serializers.data])
 
 
+### 사용자 정보 ###
 @api_view(['POST'])
 def users_info(request):
   users = request.data.get('users')
@@ -249,7 +214,7 @@ def users_info(request):
   return Response(movies)
 
 
-
+### 추천받은 영화 ###
 @api_view(['GET'])
 def recommended(request):
   if request.user.is_authenticated:
@@ -279,12 +244,10 @@ def recommended(request):
                       break
       recommendations = sample(recommendations_list, 20)
       serializer = MovieSerializer(recommendations)
-      # liked = True
     else:
       movies = get_list_or_404(Movie)
       recommendations = sample(movies, 20)
       serializer = MovieSerializer(recommendations, many=True)
-      # liked = False
 
     return Response(serializer.data)
   else:
@@ -293,6 +256,7 @@ def recommended(request):
     serializer = MovieSerializer(recommendations)
 
 
+### 현재 인기도 (상위 30개) ### 
 @api_view(['GET'])
 def current_popularity(request):
   if request.method == 'GET':
