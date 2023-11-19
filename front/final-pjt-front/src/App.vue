@@ -3,19 +3,29 @@
     <header>
       <nav class="nav">
         <div>
-          <RouterLink :to="{ name: 'MainView' }">
-            <img src="@/assets/logo.png" class="logo" alt="logo">
-          </RouterLink>
-          <RouterLink :to="{ name: 'MainView' }">Home</RouterLink>
-          <RouterLink :to="{ name: 'CategoryView' }">category</RouterLink>
+          <RouterLink :to="{ name: 'MainView' }"><img src="@/assets/logo.png" class="logo" alt="logo"></RouterLink>
+          <RouterLink :to="{ name: 'RecommendView' }">나만의 영화추천</RouterLink>
+          <div class="dropdown">
+            <RouterLink uterLink :to="{ name: 'CategoryView' }" class="dropbtn">카테고리</RouterLink>
+            <div class="dropdown-content">
+              <a>액션</a>
+              <a>드라마</a>
+              <a>공포</a>
+              <a>모험</a>
+              <a>애니</a>
+              <a>스릴러</a>
+              <a>기타</a>
+            </div>
+          </div>
+        </div>
+        <div v-if="false">
+          <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
+          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
+          <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
           <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
           <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
-          <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
-          <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
-          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
-          <RouterLink :to="{ name: 'RecommendView' }">recommend</RouterLink>
+          <ProFile/>
         </div>
-        <ProFile/>
       </nav>
     </header>
 
@@ -35,6 +45,7 @@ import ProFile from './components/ProFile.vue';
 
 </script>
 
+<!-- 전역 스타일 -->
 <style>
 .backSize {
   margin: 7% 0 0 0;
@@ -42,16 +53,21 @@ import ProFile from './components/ProFile.vue';
 }
 </style>
 
+<!-- 스코프 스타일 -->
 <style scoped>
+/* 전체 어플리케이션 레이아웃 */
 .app {
   position: relative;
 }
+
+/* 로고 스타일 */
 .logo {
   width: 80px;
 }
+
+/* 네비게이션 바 스타일 */
 .nav {
   background-color: #141414;
-  color: white;
   height: 7vh;
   display: flex;
   justify-content: space-between;
@@ -65,13 +81,15 @@ import ProFile from './components/ProFile.vue';
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.router-view {
-  margin-top: 7vh;
-  padding-bottom: 8vh;
+nav div {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-
-nav a {
+/* 네비게이션 내 링크 스타일 */
+nav div a {
+  display: block;
   font-family: Helvetica, sans-serif;
   color: white;
   text-decoration: none;
@@ -79,11 +97,61 @@ nav a {
   font-weight: bold;
 }
 
+/* 링크 호버 효과 */
 nav a:hover {
   text-decoration: underline;
-  color: #f5a623; /* 강조 색상 적용 */
+  color: #f5a623;
 }
 
+/* 드롭다운 메뉴 스타일 */
+.dropdown {
+  position: relative;
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+}
+
+/* 드롭다운 내용 스타일 */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #212121;
+  height: auto;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 100%;
+  left: 0;
+}
+
+/* 드롭다운 링크 스타일 */
+.dropdown-content a {
+  color: #b6b6b6;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* 드롭다운 링크 호버 효과 */
+.dropdown-content a:hover {
+  background-color: #2D2D2D;
+  opacity: 1;
+  color: white;
+  margin: 0;
+}
+
+/* 드롭다운 활성화 시 내용 표시 */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* 라우터 뷰 마진 설정 */
+.router-view {
+  margin-top: 7vh;
+  padding-bottom: 8vh;
+}
+
+/* 푸터 스타일 */
 .footer {
   position: absolute;
   box-sizing: border-box;
@@ -98,4 +166,5 @@ nav a:hover {
   opacity: 0.5;
   background-color: transparent;
 }
+
 </style>

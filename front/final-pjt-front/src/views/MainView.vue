@@ -111,8 +111,6 @@ import MovieCard from '../components/MovieCard.vue';
     font-weight: bold;
     margin: 20px 20px 0 20px;
 }
-
-
 .carouselSize {
     width: 800px;
     margin: 0 auto;
