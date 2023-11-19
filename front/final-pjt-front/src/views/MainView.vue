@@ -88,50 +88,57 @@ import MovieCard from '../components/MovieCard.vue';
 </script>
 
 <style scoped>
-.carousel-item {
-  transition: transform 0.5s ease;
-}
-
-.mainBack {
-    background-color: #141414;
-}
-
-.popularZone {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 20px;
-}
-.popularTitle {
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    font-size: 2em;
-    font-weight: bold;
-    margin: 20px 20px 0 20px;
-}
+/* 캐러셀 기본 설정 */
 .carouselSize {
-    width: 800px;
-    margin: 0 auto;
-    max-height: 400px;
-    overflow: hidden;
+  width: 800px;
+  margin: 0 auto;
+  max-height: 400px;
+  overflow: hidden;
 }
 
-.movieCard {
-    background-color: #333;
-    color: #fff;
-    padding: 15px;
-    margin: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: transform 0.3s ease-in-out;
-    width: 250px;
-    margin: 0;
+.carousel-inner, .carousel {
+  overflow: hidden;
 }
 
-.movieCard:hover {
-    transform: scale(1.1);
+/* 캐러셀 아이템 설정 */
+.carousel-item {
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+  height: 100%;
 }
+
+/* 캐러셀 이미지 설정 */
+.carousel-item img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* 메인 백그라운드 설정 */
+.mainBack {
+  background-color: #141414;
+}
+
+/* 인기 콘텐츠 영역 설정 */
+.popularZone {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 인기 콘텐츠 제목 설정 */
+.popularTitle {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 20px 20px 0 20px;
+}
+
 
 </style>

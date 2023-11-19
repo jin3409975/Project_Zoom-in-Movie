@@ -11,15 +11,15 @@
 <style scoped>
 .movie-card {
     width: 200px;
-    border-radius: 10px;
+    border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease-in-out;
-    margin-bottom: 20px;
+    margin-bottom: 11px;
 }
 
 .movie-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .movie-image {
