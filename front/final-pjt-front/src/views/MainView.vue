@@ -1,6 +1,6 @@
 <template>
     <div class="mainBackColor backSize">
-        <!-- 케루젤 -->
+        <!-- 케러셀 -->
         <div id="carouselExampleIndicators" class="carousel slide carouselSize" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -28,8 +28,8 @@
             </button>
         </div>
 
-        <h1 class="popularTitle">일단넘겨 인기 콘텐츠</h1>
-        <main class="popularZone">
+        <h1 class="listTitle">일단넘겨 인기 콘텐츠</h1>
+        <main class="movieList">
             <MovieCard class="movieCard"/>
             <MovieCard class="movieCard"/>
             <MovieCard class="movieCard"/>
@@ -75,7 +75,6 @@
             <MovieCard class="movieCard"/>
             <MovieCard class="movieCard"/>
             <MovieCard class="movieCard"/>
-            
         </main>
 
 
@@ -90,6 +89,7 @@ import MovieCard from '../components/MovieCard.vue';
 <style scoped>
 /* 캐러셀 기본 설정 */
 .carouselSize {
+  top: 1px;
   width: 800px;
   margin: 0 auto;
   max-height: 400px;
@@ -115,25 +115,4 @@ import MovieCard from '../components/MovieCard.vue';
   object-fit: cover;
   border-radius: 10px;
 }
-
-/* 인기 콘텐츠 영역 설정 */
-.popularZone {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 20px 0;
-}
-
-/* 인기 콘텐츠 제목 설정 */
-.popularTitle {
-  color: white;
-  font-family: 'Roboto', sans-serif;
-  font-size: 2em;
-  font-weight: bold;
-  margin: 30px 30px 0 0;
-}
-
-
 </style>

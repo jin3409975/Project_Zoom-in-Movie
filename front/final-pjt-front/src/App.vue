@@ -6,7 +6,7 @@
           <RouterLink :to="{ name: 'MainView' }"><img src="@/assets/logo.png" class="logo" alt="logo"></RouterLink>
           <RouterLink :to="{ name: 'RecommendView' }">나만의 영화추천</RouterLink>
           <div class="dropdown">
-            <RouterLink uterLink :to="{ name: 'CategoryView' }" class="dropbtn">카테고리</RouterLink>
+            <RouterLink :to="{ name: 'CategoryView' }" class="dropbtn">카테고리</RouterLink>
             <div class="dropdown-content">
               <a>액션</a>
               <a>드라마</a>
@@ -49,14 +49,33 @@ import ProFile from './components/ProFile.vue';
 <!-- 전역 스타일 -->
 <style>
 .backSize {
-  margin: 7% 0 0 0;
+  margin: 7vh 0 0 0;
   height: 100%;
+  min-height: 93vh;
+  padding: 0 3.5%;
+  padding-top: 1%;
 }
 
 /* 메인 백그라운드 설정 */
 .mainBackColor {
   background-color: #141414;
-  padding-left: 3.5%;
+}
+
+.listTitle {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 30px 30px 0 0;
+}
+
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px 0;
 }
 </style>
 

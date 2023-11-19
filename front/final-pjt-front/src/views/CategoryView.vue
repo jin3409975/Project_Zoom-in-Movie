@@ -1,7 +1,7 @@
 <template>
     <div class="mainBackColor backSize">
-
-        <main>
+        <h1 class="listTitle">카테고리 명</h1>
+        <main class="movieList">
             <MovieCard />
             <MovieCard />
             <MovieCard />
