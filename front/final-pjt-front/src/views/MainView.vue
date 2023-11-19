@@ -1,5 +1,5 @@
 <template>
-    <div class="mainBack backSize">
+    <div class="mainBackColor backSize">
         <!-- 케루젤 -->
         <div id="carouselExampleIndicators" class="carousel slide carouselSize" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -116,11 +116,6 @@ import MovieCard from '../components/MovieCard.vue';
   border-radius: 10px;
 }
 
-/* 메인 백그라운드 설정 */
-.mainBack {
-  background-color: #141414;
-}
-
 /* 인기 콘텐츠 영역 설정 */
 .popularZone {
   display: flex;
@@ -128,7 +123,7 @@ import MovieCard from '../components/MovieCard.vue';
   justify-content: center;
   align-items: flex-start;
   gap: 20px;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 /* 인기 콘텐츠 제목 설정 */
@@ -137,7 +132,7 @@ import MovieCard from '../components/MovieCard.vue';
   font-family: 'Roboto', sans-serif;
   font-size: 2em;
   font-weight: bold;
-  margin: 20px 20px 0 20px;
+  margin: 30px 30px 0 0;
 }
 
 

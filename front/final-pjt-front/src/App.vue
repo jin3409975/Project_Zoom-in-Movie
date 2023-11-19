@@ -18,12 +18,14 @@
             </div>
           </div>
         </div>
+        <div v-if="true">
+          <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
+          <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
+        </div>
         <div v-if="false">
           <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
           <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
           <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
-          <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
-          <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
           <ProFile/>
         </div>
       </nav>
@@ -41,9 +43,8 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import ProFile from './components/ProFile.vue';
-
-
 </script>
+
 
 <!-- 전역 스타일 -->
 <style>
@@ -51,21 +52,27 @@ import ProFile from './components/ProFile.vue';
   margin: 7% 0 0 0;
   height: 100%;
 }
+
+/* 메인 백그라운드 설정 */
+.mainBackColor {
+  background-color: #141414;
+  padding-left: 3.5%;
+}
 </style>
 
 <!-- 스코프 스타일 -->
 <style scoped>
-/* 전체 어플리케이션 레이아웃 */
+/* 애플리케이션 레이아웃 설정 */
 .app {
   position: relative;
 }
 
-/* 로고 스타일 */
+/* 로고 크기 설정 */
 .logo {
   width: 80px;
 }
 
-/* 네비게이션 바 스타일 */
+/* 네비게이션 바 스타일 설정 */
 .nav {
   background-color: #141414;
   height: 7vh;
@@ -73,6 +80,7 @@ import ProFile from './components/ProFile.vue';
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+  padding-left: 3.5%;
   position: fixed;
   top: 0;
   left: 0;
@@ -81,13 +89,14 @@ import ProFile from './components/ProFile.vue';
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* 네비게이션 내부 div 설정 */
 nav div {
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-/* 네비게이션 내 링크 스타일 */
+/* 네비게이션 링크 스타일 설정 */
 nav div a {
   display: block;
   font-family: Helvetica, sans-serif;
@@ -107,11 +116,11 @@ nav a:hover {
 .dropdown {
   position: relative;
   display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: center;
+  align-items: center;
 }
 
-/* 드롭다운 내용 스타일 */
+/* 드롭다운 메뉴 내용 */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -124,7 +133,7 @@ nav a:hover {
   left: 0;
 }
 
-/* 드롭다운 링크 스타일 */
+/* 드롭다운 메뉴 링크 스타일 */
 .dropdown-content a {
   color: #b6b6b6;
   padding: 12px 16px;
@@ -132,7 +141,7 @@ nav a:hover {
   display: block;
 }
 
-/* 드롭다운 링크 호버 효과 */
+/* 드롭다운 메뉴 링크 호버 효과 */
 .dropdown-content a:hover {
   background-color: #2D2D2D;
   opacity: 1;
@@ -140,7 +149,7 @@ nav a:hover {
   margin: 0;
 }
 
-/* 드롭다운 활성화 시 내용 표시 */
+/* 드롭다운 활성화시 내용 표시 */
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -151,7 +160,7 @@ nav a:hover {
   padding-bottom: 8vh;
 }
 
-/* 푸터 스타일 */
+/* 푸터 스타일 설정 */
 .footer {
   position: absolute;
   box-sizing: border-box;
