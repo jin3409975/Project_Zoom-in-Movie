@@ -115,4 +115,10 @@ import MovieCard from '../components/MovieCard.vue';
   object-fit: cover;
   border-radius: 10px;
 }
+
+.carousel-item:hover {
+    transform: rotate(10deg) scale(1.1) translateX(5px);
+    transition: transform 0.3s ease;
+    /* transform: scale(1.05); */
+}
 </style>

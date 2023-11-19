@@ -17,6 +17,7 @@
               <a>기타</a>
             </div>
           </div>
+          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
         </div>
         <div v-if="true">
           <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
@@ -24,7 +25,6 @@
         </div>
         <div v-if="false">
           <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
-          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
           <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
           <ProFile/>
         </div>
@@ -53,7 +53,6 @@ import ProFile from './components/ProFile.vue';
   height: 100%;
   min-height: 93vh;
   padding: 0 3.5%;
-  padding-top: 1%;
 }
 
 /* 메인 백그라운드 설정 */
@@ -66,7 +65,8 @@ import ProFile from './components/ProFile.vue';
   font-family: 'Roboto', sans-serif;
   font-size: 2em;
   font-weight: bold;
-  margin: 30px 30px 0 0;
+  margin: 0;
+  padding: 30px 30px 0 0;
 }
 
 .movieList {
