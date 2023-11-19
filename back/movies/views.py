@@ -175,6 +175,7 @@ def like_movie_users(request, my_pk):
 
 
 ### 해당 사용자가 좋아요 누른 영화들 ###
+#
 @api_view(['post'])
 def user_like_movies(request, user_pk):
   like_movies_id = request.data.get('like_movies')
