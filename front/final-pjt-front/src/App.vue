@@ -18,6 +18,7 @@
             </div>
           </div>
           <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
+          <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
         </div>
         <div v-if="true">
           <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
@@ -25,7 +26,6 @@
         </div>
         <div v-if="false">
           <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
-          <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
           <ProFile/>
         </div>
       </nav>
