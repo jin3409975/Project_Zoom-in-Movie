@@ -17,14 +17,14 @@
               <a>기타</a>
             </div>
           </div>
-          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
+          <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
         </div>
         <div v-if="true">
           <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
           <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
         </div>
         <div v-if="false">
-          <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
+          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
           <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
           <ProFile/>
         </div>
