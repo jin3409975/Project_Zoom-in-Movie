@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 
 
-
 export const useCounterStore = defineStore('account', () => {
   const router = useRouter()
   const API_URL = 'http://127.0.0.1:8000'
@@ -17,7 +16,6 @@ export const useCounterStore = defineStore('account', () => {
     }
     // return token.value !== null && token.value !== undefined
   })
-
 
 
   // 회원가입

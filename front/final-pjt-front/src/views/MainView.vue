@@ -3,22 +3,21 @@
     <!-- 케러셀 -->
     <div class="carouselSize">
       <div id="carouselExampleIndicators" class="carousel slide marginMid" data-bs-ride="carousel">
+        <!-- 아래 버튼 -->
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button v-for="i in 4" type="button" data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="i" :aria-label="`Slide ${i + 1}`"></button>
         </div>
+        <!-- 케루젤 이미지 -->
         <div class="carousel-inner marginMid">
           <div class="carousel-item active" data-bs-interval="4500">
-            <img src="https://occ-0-988-993.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABRB8wiQJXy6Ecwac6ye3koG50Hx36a5ljm_e6o4BXnl_becinwzUH9HZvVWYRHpeRAdPLZcYkYlVI0KxHi7rzQoJTpoV2H_9BHts.webp?r=6df" class="d-block w-100 rounded" alt="#">
+            <img @click="goDetail(store.movies[0].movie_id)" :src="`https://image.tmdb.org/t/p/original${store.movies[0]?.backdrop_path}`" class="d-block w-100 rounded" alt="#">
           </div>
-          <div class="carousel-item" data-bs-interval="4500">
-            <img src="https://occ-0-988-993.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABWVW0OpxSD0EVQlMznHowIIKBSSgL2BHrse2laXLGrb4zeLBFP4UmOY3I874f3gPROtcUp8BIXFxCrDgJbZAwxFQhZAW2hBVeds.webp?r=c4c" class="d-block w-100 rounded" alt="#">
-          </div>
-          <div class="carousel-item" data-bs-interval="4500">
-            <img src="https://image.tmdb.org/t/p/w500/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg" class="d-block w-100 rounded" alt="#">
+          <div v-for="i in 4" class="carousel-item" data-bs-interval="4500">
+            <img @click="goDetail(store.movies[i].movie_id)" :src="`https://image.tmdb.org/t/p/original${store.movies[i]?.backdrop_path}`" class="d-block w-100 rounded" alt="#">
           </div>
         </div>
+        <!-- 좌우 버튼 -->
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -30,25 +29,34 @@
       </div>
     </div>
 
+    <!-- 인기순 -->
     <h1 class="listTitle">일단넘겨 인기 콘텐츠</h1>
     <main class="movieList">
-        <MovieCard class="movieCard"/>
+      <MovieCard 
+      v-for="movie in store.movies" :key="movie.id" :movie="movie" 
+      class="movieCard"/>
     </main>
 
   </div>
 </template>
 
 <script setup>
-// import { onMounted } from 'vue'
-// import { useCounterStore } from '@/stores/counter'
-// import MovieCard from '../components/MovieCard.vue'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router';
+import { useMovieStore } from '@/stores/movie.js'
+import MovieCard from '../components/MovieCard.vue'
+import YoutubeRelatedCard from '../components/YoutubeRelatedCard.vue';
 
-// const store = useCounterStore()
+const store = useMovieStore()
+const router = useRouter()
 
-// onMounted(() => {
-//   store.getMovies()
-// })
+onMounted(() => {
+  store.getPopularMovies()
+})
 
+const goDetail = function (movieId) {
+    router.push({ name: 'MovieDetailView', params: { movieId: movieId} })
+}
 </script>
 
 <style scoped>
@@ -82,6 +90,10 @@
 	width: auto;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.carousel-item img:hover {
+  cursor: pointer;
 }
 
 .carousel-item:hover {

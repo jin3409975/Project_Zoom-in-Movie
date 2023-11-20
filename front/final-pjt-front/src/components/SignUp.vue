@@ -19,7 +19,6 @@
   import { useCounterStore } from '@/stores/account'
   import { useRouter } from 'vue-router'
 
-  
   const router = useRouter()
   const store = useCounterStore()
   const username = ref(null)

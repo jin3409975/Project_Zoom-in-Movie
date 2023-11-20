@@ -1,10 +1,24 @@
 <template>
     <div class="movie-card">
-        <img class="movie-image" src="https://occ-0-988-993.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABeHSyu8X6fwOdoSQmHsd0MQnE-ko8EEHz-jihj4Hm2lvwkcllFTsqlX_NJWlS3qpSrqDf7lpLzDLxfEP8S7KFwNBWfP4vasLy8qzKqgqLmqAteMUY_1S2SE5lp3cAOHLiyj06PnVkFFAvLuuEYDQ7xH3U5-4RoiSugzcJhdr4LG_3NGNN9y53VK7rk3pGOuKHJ1kFjcRT-ObTZp22D00sj0wb1V6wKPMGF7LraTY7ZWhQuYr1E9jMNuuPdUjXBmsE_bGb11cjQ6syEUT1ZNl8YWmwfibDUDeiswK4k4NArJgKSjIxO9SYcM.jpg?r=1c6" alt="영화 제목">
+        <img @click="goDetail" class="movie-image" :src="img_url" :alt="movie.title">
     </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+const props = defineProps({
+    movie: Object,
+})
+
+const path = props.movie.backdrop_path
+const poster_path = props.movie.poster_path
+const img_url = `https://image.tmdb.org/t/p/original${poster_path}`
+
+const goDetail = function () {
+    router.push({ name: 'MovieDetailView', params: { movieId: props.movie.movie_id} })
+}
 
 </script>
 
@@ -21,6 +35,7 @@
 
 .movie-card:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .movie-image {

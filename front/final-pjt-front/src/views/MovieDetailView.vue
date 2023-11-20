@@ -6,20 +6,26 @@
 			</div>
 			<div class="detailDiscriptions">
 				<div class="leftDiscriptions">
-					<h3>이두나</h3>
-					<p>한국의 로맨스 웹툰. 작가는 나노리스트를 연재한 민송아. 이번에도 그림체와 인물 표현이 전작과 비슷하다. 그리고 부제는 ~두근두근 누나리스트~</p>
+					<h3>{{ movieStore.movie.title }}</h3>
+					<p>{{ movieStore.movie.overview }}</p>
 				</div>
 				<div class="rightDiscriptions">
-					<p>출연: 이유미, 김정은, 김해숙, 더 보기</p>
-					<p>장르: 드라마, 코미디 시리즈, 범죄 시리즈</p>
+					<p>출연: 정보 추가 중</p>
+					<p>장르: 
+						<span v-for="genre in movieStore.genre">{{ genre }}&nbsp;</span>
+					</p>
 				</div>
 			</div>
 			<hr class="">
 			<div class="commentsPlace">
-				<h3 class="commentCnt">댓글 5개</h3>
+				<h3 class="commentCnt">댓글 {{ commentCnt }}개</h3>
 				<div>
 					<CommentCreate/>
-					<Comment v-for="i in 5"/>
+					<Comment
+					 v-for="comment in movieStore.comments"
+					 :key="comment.id"
+					 :comment="comment"
+					 />
 				</div>
 			</div>
 			<div>
@@ -33,19 +39,51 @@
 </template>
 
 <script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router';
+import axios from 'axios'
+import { useMovieStore } from '../stores/movie';
+import { useCounterStore } from '../stores/account';
 import Comment from '../components/Comment.Vue';
 import CommentCreate from '@/components/CommentCreate.Vue'
 import YoutubeRelatedCard from '../components/YoutubeRelatedCard.vue'
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
 
-// 유튜브 API 키
-const apiKey = import.meta.env.VITE_YOUTUBE_KEY;
+const route = useRoute()
+const accountStore = useCounterStore()
+const movieStore = useMovieStore()
+const apiKey = import.meta.env.VITE_YOUTUBE_KEY
+const videoId =  ref(null)
+const videoUrl = ref(null)
 
-const videoId = '4ykb-ftG3Bc';
-const videoUrl = ref(`https://www.youtube.com/embed/${videoId}`);
-const videoTitle = ref('');
-const videoDescription = ref('');
+// 예고편
+onMounted(() => {
+	movieStore.getMovie(route.params.movieId);
+	axios({
+		method: 'get',
+		url: `https://www.googleapis.com/youtube/v3/search`,
+		params: {
+			part: 'snippet',
+			q: `${movieStore.movie.title} 공식 예고편`,
+			type: 'video',
+			key: apiKey
+		}
+	})
+		.then((res) => {
+			videoId.value = res.data.items[0].id.videoId
+			videoUrl.value = `https://www.youtube.com/embed/${videoId.value}`;
+		})
+		.catch((err) => {
+			console.log(err)
+		})
+
+})
+
+// 댓글
+const commentCnt = ref(null)
+onMounted(() => {
+	movieStore.getComments(route.params.movieId)
+	commentCnt.value = movieStore.comments.length
+})
 </script>
   
 <style scoped>

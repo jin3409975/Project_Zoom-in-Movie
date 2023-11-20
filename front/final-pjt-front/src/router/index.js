@@ -18,7 +18,7 @@ const router = createRouter({
       component: MainView
     },
     {
-      path: '/category',
+      path: '/category/:genre',
       name: 'CategoryView',
       component: CategoryView
     },
@@ -33,12 +33,7 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/logout',
-      name: 'LogoutView',
-      component: LogoutView
-    },
-    {
-      path: '/movie',
+      path: '/movie/:movieId',
       name: 'MovieDetailView',
       component: MovieDetailView
     },
