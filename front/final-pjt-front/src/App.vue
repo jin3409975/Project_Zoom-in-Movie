@@ -17,10 +17,7 @@
               <a>기타</a>
             </div>
           </div>
-<<<<<<< HEAD
-=======
           <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
->>>>>>> b56e65e4dca2e109382c4c2752fb776f414b054b
           <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
         </div>
         <div v-if="true">
@@ -29,11 +26,6 @@
           <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
         </div>
         <div v-if="false">
-<<<<<<< HEAD
-          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
-          <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
-=======
->>>>>>> b56e65e4dca2e109382c4c2752fb776f414b054b
           <ProFile/>
         </div>
       </nav>
