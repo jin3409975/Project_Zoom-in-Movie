@@ -11,7 +11,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useCounterStore } from '@/stores/counter'
+import { useCounterStore } from '@/stores/account'
 import { useRouter } from 'vue-router'
 
 const store = useCounterStore()

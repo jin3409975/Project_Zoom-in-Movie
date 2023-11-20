@@ -6,25 +6,24 @@
           <RouterLink :to="{ name: 'MainView' }"><img src="@/assets/logo.png" class="logo" alt="logo"></RouterLink>
           <RouterLink :to="{ name: 'RecommendView' }">나만의 영화추천</RouterLink>
           <div class="dropdown">
-            <RouterLink :to="{ name: 'CategoryView' }" class="dropbtn">카테고리</RouterLink>
+            <p class="dropbtn">카테고리</p>
             <div class="dropdown-content">
-              <a>액션</a>
-              <a>드라마</a>
-              <a>공포</a>
-              <a>모험</a>
-              <a>애니</a>
-              <a>스릴러</a>
-              <a>기타</a>
+              <RouterLink
+               v-for="genre in store.genres"
+               :key="genre.genre_id"
+               :to="{ name: 'CategoryView', params: {genre: genre.genre_name} }">
+               {{ genre.genre_name }}
+              </RouterLink>
             </div>
           </div>
           <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
-          <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
         </div>
         <div v-if="true">
           <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
           <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
           <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
         </div>
+        <!-- 준비중 -->
         <div v-if="false">
           <ProFile/>
         </div>
@@ -41,8 +40,18 @@
 </template>
 
 <script setup>
+import { useMovieStore } from '@/stores/movie.js'
 import { RouterLink, RouterView } from 'vue-router'
 import ProFile from './components/ProFile.vue';
+import { onMounted } from 'vue';
+
+const store = useMovieStore()
+
+onMounted(() => {
+  if (store.genres.length < 2) {
+    store.getGenres()
+  }
+})
 </script>
 
 
@@ -148,7 +157,7 @@ nav div {
 }
 
 /* 네비게이션 링크 스타일 설정 */
-nav div a {
+nav div a, nav div p {
   display: block;
   font-family: Helvetica, sans-serif;
   color: white;
@@ -157,9 +166,13 @@ nav div a {
   font-weight: bold;
 }
 
+nav div p:hover {
+  color: #f5a623;
+  cursor: pointer;
+}
+
 /* 링크 호버 효과 */
 nav a:hover {
-  text-decoration: underline;
   color: #f5a623;
 }
 

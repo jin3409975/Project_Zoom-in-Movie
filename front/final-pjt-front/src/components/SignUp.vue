@@ -16,7 +16,7 @@
   
   <script setup>
   import { ref } from 'vue'
-  import { useCounterStore } from '@/stores/counter'
+  import { useCounterStore } from '@/stores/account'
 
   const store = useCounterStore()
   const username = ref(null)
