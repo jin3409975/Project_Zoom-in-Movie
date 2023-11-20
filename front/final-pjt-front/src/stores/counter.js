@@ -31,5 +31,67 @@ export const useCounterStore = defineStore('counter', () => {
       })
   }
 
-  return { movies, API_URL, getMovies }
+
+  // 회원가입
+  const signUp = function (payload) {
+    const { username, password1, password2 } = payload
+
+    axios({
+      method: 'post',
+      url: `${API_URL}/accounts/signup/`,
+      data: {
+        username, password1, password2
+      }
+    })
+      .then((res) => {
+        console.log(res)
+        const password = password1
+        logIn({ username, password })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+
+  // 로그인
+  const logIn = function (payload) {
+    const { username, password } = payload
+
+    axios({
+      method: 'post',
+      url: `${API_URL}/accounts/login/`,
+      data: {
+        username, password
+      }
+    })
+      .then((res) => {
+        console.log(res.data)
+        token.value = res.data.key
+        router.push({ name: 'ArticleView' })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+
+  // 로그아웃
+  const logOut = function () {
+    axios({
+      method: 'post',
+      url: `${API_URL}/accounts/logout/`,
+    })
+      .then((res) => {
+        token.value = null
+        router.push({ name: 'ArticleView' })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+
+
+  return { movies, API_URL, isLogin, getMovies, signUp, logIn, logOut }
 }, { persist: true })
