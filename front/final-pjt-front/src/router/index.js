@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainView from '@/views/MainView.vue'
 import CategoryView from '@/views/CategoryView.vue'
 import SignUpView from '@/views/SignUpView.vue'
-import LoginView from '@/views/LoginView.vue'
 import MovieDetailView from '@/views/MovieDetailView.vue'
+import LoginView from '@/views/LoginView.vue'
+import LogoutView from '@/views/LogoutView.vue'
 import MyPageView from '@/views/MyPageView.vue'
 import RecommendChoiceView from '@/views/RecommendChoiceView.vue'
 import RecommendView from '@/views/RecommendView.vue'
@@ -30,6 +31,11 @@ const router = createRouter({
       path: '/login',
       name: 'LoginView',
       component: LoginView
+    },
+    {
+      path: '/logout',
+      name: 'LogoutView',
+      component: LogoutView
     },
     {
       path: '/movie',

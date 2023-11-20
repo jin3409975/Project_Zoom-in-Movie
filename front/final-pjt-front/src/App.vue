@@ -20,10 +20,11 @@
           <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
           <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
         </div>
-        <div v-if="true">
-          <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
-          <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
-          <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
+        <div>
+          <RouterLink v-if="isLogin" :to="{ name: 'MyPageView' }">mypage</RouterLink>
+          <RouterLink v-if="!isLogin" :to="{ name: 'SignUpView' }">signup</RouterLink>
+          <RouterLink v-if="!isLogin" :to="{ name: 'LoginView' }">login</RouterLink>
+          <RouterLink v-if="isLogin" :to="{ name: 'LogoutView' }">logout</RouterLink>
         </div>
         <div v-if="false">
           <ProFile/>
@@ -42,7 +43,12 @@
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import ProFile from './components/ProFile.vue';
+import ProFile from './components/ProFile.vue'
+import { useCounterStore } from '@/stores/account.js'
+
+const store = useCounterStore()
+const isLogin = store.isLogin
+
 </script>
 
 

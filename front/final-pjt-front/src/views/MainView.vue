@@ -30,30 +30,24 @@
       </div>
     </div>
 
-    <!-- <h1 class="listTitle">일단넘겨 인기 콘텐츠</h1>
-    <main class="movieList">
-        <MovieCard class="movieCard"/>
-    </main> -->
-
     <h1 class="listTitle">일단넘겨 인기 콘텐츠</h1>
     <main class="movieList">
-      <MovieCard 
-      v-for="movie in movies" :key="movie.id" :movie="movie" 
-      class="movieCard"/>
+        <MovieCard class="movieCard"/>
     </main>
+
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-import { useCounterStore } from '@/stores/counter'
-import MovieCard from '../components/MovieCard.vue'
+// import { onMounted } from 'vue'
+// import { useCounterStore } from '@/stores/counter'
+// import MovieCard from '../components/MovieCard.vue'
 
-const store = useCounterStore()
+// const store = useCounterStore()
 
-onMounted(() => {
-  store.getMovies()
-})
+// onMounted(() => {
+//   store.getMovies()
+// })
 
 </script>
 
