@@ -10,7 +10,7 @@
 
 <style scoped>
 .movie-card {
-    width: 200px;
+    width: 300px;
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);

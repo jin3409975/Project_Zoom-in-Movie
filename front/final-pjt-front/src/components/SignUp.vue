@@ -47,7 +47,7 @@
     background-color: #191A1C;
     border: 1px solid #E73E3E;
     width: 30vh;
-    color: #000000;
+    color: white;
     font-size: 16px;
     padding: 10px;
     border-radius: 4px;
