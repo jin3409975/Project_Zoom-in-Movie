@@ -1,11 +1,20 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 
 
 export const useCounterStore = defineStore('counter', () => {
   const movies = ref([])
   const API_URL = 'http://127.0.0.1:8000'
+  const isLogin = computed(() => {
+    if (token.value === null) {
+      return false
+    } else {
+      return true
+    }
+  })
+
 
   // DRF에 article 조회 요청을 보내는 action
   const getMovies = function () {
