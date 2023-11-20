@@ -21,22 +21,24 @@ export const useCounterStore = defineStore('counter', () => {
 
   // 회원가입
   const signUp = function (payload) {
-    const { username, password1, password2 } = payload
+    const { username, password } = payload
 
     axios({
       method: 'post',
       url: `${API_URL}/accounts/signup/`,
       data: {
-        username, password1, password2
+        username, password
       }
     })
       .then((res) => {
-        console.log(res)
-        const password = password1
-        logIn({ username, password })
+        console.log(res.data)
+        token.value = res.data.key
+        // const password = password1
+        // logIn({ username, password })
       })
       .catch((err) => {
         console.log(err)
+        alert('아이디 또는 비밀번호가 일치하지 않습니다.')
       })
   }
 
