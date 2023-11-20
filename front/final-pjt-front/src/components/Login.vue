@@ -1,15 +1,29 @@
 <template>
     <div>
         <h1 class="loginText">로그인</h1>
-        <form @submit.prevent="" class="loginForm">
-            <input type="text" placeholder="아이디">
-            <input type="text" placeholder="비밀번호">
+        <form @submit.prevent="logIn" class="loginForm">
+            <input type="text" v-model.trim="username" placeholder="아이디">
+            <input type="password" v-model.trim="password" placeholder="비밀번호">
             <button>로그인</button>
         </form>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { useCounterStore } from '@/stores/counter'
+
+const store = useCounterStore()
+const username = ref(null)
+const password = ref(null)
+
+const logIn = function () {
+  const payload = {
+    username: username.value,
+    password: password.value
+  }
+  store.logIn(payload)
+}
 
 </script>
 
