@@ -1,15 +1,41 @@
 <template>
     <div>
         <h1 class="loginText">로그인</h1>
-        <form @submit.prevent="" class="loginForm">
-            <input type="text" placeholder="아이디">
-            <input type="text" placeholder="비밀번호">
-            <button>로그인</button>
+        <form @submit.prevent="logIn" class="loginForm">
+            <input type="text" v-model.trim="username" placeholder="아이디">
+            <input type="password" v-model.trim="password" placeholder="비밀번호">
+            <button type="submit">로그인</button>
         </form>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { useCounterStore } from '@/stores/counter'
+import { useRouter } from 'vue-router'
+
+const store = useCounterStore()
+const router = useRouter()
+const username = ref(null)
+const password = ref(null)
+
+const logIn = function () {
+  const payload = {
+    username: username.value,
+    password: password.value
+  }
+    try {
+        // 로그인 API 호출
+        store.logIn(payload)
+
+        // 로그인 성공 시 메인 페이지로 이동
+        router.push({ name: 'MainView' })
+    } catch (error) {
+        console.error('로그인 에러:', error)
+        // 실패 시 에러 처리 로직 추가
+        alert('비밀번호가 일치하지 않습니다.')
+    }
+}
 
 </script>
 

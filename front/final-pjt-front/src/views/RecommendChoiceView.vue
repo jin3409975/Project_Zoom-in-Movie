@@ -1,5 +1,5 @@
 <template>
-    <div class="backSize mainBackColor choiceBack">
+    <div class="backSize mainBackColor midDisplay">
         <div class="choicePlace">
             <div class="choiceTitle">
                 <h2>좋아하는 콘텐츠를 3개 선택하세요.</h2>
@@ -44,23 +44,13 @@ import MoviePoster from '../components/MoviePoster.vue';
 </script>
 
 <style scoped>
-.recommend-choice-nav .nav {
-    width: 1000px; /* 원하는 너비로 설정 */
-    /* 다른 스타일 규칙 추가 가능 */
-  }
-.choiceBack {
-    display: flex;
-    justify-content: center;
-}
 .choicePlace {
-    max-width: 1000px;
     display: flex;
 }
 
 .choiceTitle {
     display: inline;
     color: white;
-    word-break: keep-all;
     font-family: Helvetica, sans-serif;
     margin: 0 0 .4em;
     width: 200%;
@@ -71,5 +61,4 @@ import MoviePoster from '../components/MoviePoster.vue';
     font-weight: 500;
     line-height: 1.2;
 }
-
 </style>

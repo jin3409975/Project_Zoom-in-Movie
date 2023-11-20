@@ -13,9 +13,9 @@
 
 <style scoped>
 .movie-card {
-  width: 130px;
+  width: 200px;
   position: relative;
-  cursor: pointer; /* 마우스 오버시 커서 변경 */
+  cursor: pointer;
 }
 
 .movie-card:hover {
@@ -24,14 +24,14 @@
 }
 
 .movie-image {
-  width: 130px;
+  width: 200px;
   display: block;
   border-radius: 4px;
   transition: transform 0.3s ease;
 }
 
 .movie-overlay {
-  width: 130px;
+  width: 200px;
   position: absolute;
   top: 0;
   left: 0;
@@ -53,6 +53,6 @@
 }
 
 .like-icon {
-  font-size: 3em; /* 이모티콘 크기 */
+  font-size: 3em;
 }
 </style>

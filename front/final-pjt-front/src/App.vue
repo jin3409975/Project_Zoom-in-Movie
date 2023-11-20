@@ -17,15 +17,23 @@
               <a>기타</a>
             </div>
           </div>
+<<<<<<< HEAD
+=======
+          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
+>>>>>>> b56e65e4dca2e109382c4c2752fb776f414b054b
           <RouterLink :to="{ name: 'MovieDetailView' }">movie</RouterLink>
         </div>
         <div v-if="true">
+          <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
           <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
           <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
         </div>
         <div v-if="false">
+<<<<<<< HEAD
           <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
           <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
+=======
+>>>>>>> b56e65e4dca2e109382c4c2752fb776f414b054b
           <ProFile/>
         </div>
       </nav>
@@ -48,11 +56,35 @@ import ProFile from './components/ProFile.vue';
 
 <!-- 전역 스타일 -->
 <style>
+.commentProfile {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  margin-right: 1.3%;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+  word-break: keep-all;
+}
+
+hr {
+  margin: 0 auto;
+  border-color: white;
+  width: 90%;
+}
+
 .backSize {
-  margin: 7vh 0 0 0;
+  margin: 7vh 0 0;
   height: 100%;
   min-height: 93vh;
   padding: 0 3.5%;
+}
+
+.midDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 메인 백그라운드 설정 */
@@ -62,7 +94,6 @@ import ProFile from './components/ProFile.vue';
 
 .listTitle {
   color: white;
-  font-family: 'Roboto', sans-serif;
   font-size: 2em;
   font-weight: bold;
   margin: 0;
@@ -77,6 +108,15 @@ import ProFile from './components/ProFile.vue';
   gap: 20px;
   padding: 20px 0;
 }
+
+.max_w1000 {
+  max-width: 1000px;
+}
+
+.marginMid {
+  margin: 0 auto;
+}
+
 </style>
 
 <!-- 스코프 스타일 -->

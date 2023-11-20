@@ -39,6 +39,7 @@ def comment_list(request):
 
 ### 댓글 생성 ###
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def comment_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == 'POST':
@@ -50,6 +51,7 @@ def comment_create(request, movie_pk):
 
 ### 댓글 조회, 수정, 삭제 ###    
 @api_view(['GET', 'DELETE', 'PUT'])
+@permission_classes([IsAuthenticated])
 def comment_detail(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     if request.method == 'GET':
