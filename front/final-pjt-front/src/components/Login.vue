@@ -29,11 +29,11 @@ const logIn = function () {
         store.logIn(payload)
 
         // 로그인 성공 시 메인 페이지로 이동
-        router.push({ name: 'MainView' })
+        // router.push({ name: 'MainView' })
     } catch (error) {
         console.error('로그인 에러:', error)
         // 실패 시 에러 처리 로직 추가
-        alert('비밀번호가 일치하지 않습니다.')
+        alert('아이디 또는 비밀번호가 일치하지 않습니다.')
     }
 }
 
