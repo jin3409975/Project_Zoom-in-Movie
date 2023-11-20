@@ -33,7 +33,7 @@ const logIn = function () {
     } catch (error) {
         console.error('로그인 에러:', error)
         // 실패 시 에러 처리 로직 추가
-        alert('아이디 또는 비밀번호가 일치하지 않습니다.')
+        alert('비밀번호가 일치하지 않습니다.')
     }
 }
 
