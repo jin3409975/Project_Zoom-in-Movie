@@ -114,7 +114,7 @@ export const useCounterStore = defineStore('account', () => {
       url: `${API_URL}/accounts/user/${userId}/`,
     })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         user.value = res.data
       })
       .catch((err) => {

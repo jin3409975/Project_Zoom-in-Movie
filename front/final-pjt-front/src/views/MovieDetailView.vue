@@ -16,7 +16,7 @@
 			</div>
 			<hr class="">
 			<div class="commentsPlace">
-				<h3 class="commentCnt">댓글 {{ commentCnt }}개</h3>
+				<h3 class="commentCnt">댓글 {{ movieStore.comments.length }}개</h3>
 				<div>
 					<CommentCreate/>
 					<Comment
@@ -47,14 +47,13 @@ import YoutubeTrailer from '@/components/YoutubeTrailer.vue'
 
 const route = useRoute()
 const movieStore = useMovieStore()
-const commentCnt = ref(null)
+
 
 // 영화 및 댓글
 watch(() => route.params.movieId, (newMovieId) => {
 	window.scrollTo(0, 0);
   movieStore.getMovie(newMovieId);
   movieStore.getComments(newMovieId);
-	commentCnt.value = movieStore.comments.length
 }, { immediate: true });
 </script>
   
