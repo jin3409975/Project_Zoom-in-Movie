@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.contrib.auth import get_user_model
 from .models import Movie, Comment, Genre, Actor
-from .serializers import MovieListSerializer, CommentListSerializer, MovieSerializer
+from .serializers import MovieListSerializer, CommentListSerializer, MovieSerializer, GenreListSerializer
 from accounts.serializers import UserSerializer
 from random import sample
 
@@ -37,11 +37,19 @@ def comment_list(request):
     return Response(serializer.data)
 
 
-### 댓글 생성 ###
-@api_view(['POST'])
+### 댓글 생성 및 목록 조회 ###
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def comment_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
+    if request.method == 'GET':
+        comments = get_list_or_404(Comment, movie=movie)
+        if len(comments) > 1:
+          seralizer = MovieListSerializer(comments, many=True)
+        else:
+          seralizer = MovieListSerializer(comments)
+        return Response(seralizer.data)
+      
     if request.method == 'POST':
         serializer = CommentListSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -266,3 +274,25 @@ def current_popularity(request):
     movies = Movie.objects.order_by('-popularity')[:30]
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+  
+  
+### 장르 목록 ###
+@api_view(['GET'])
+def genres(request):
+    if request.method == 'GET':
+        genres = get_list_or_404(Genre)
+        seralizer = GenreListSerializer(genres, many=True)
+        return Response(seralizer.data)
+      
+
+### 장르별 영화 조회 ###
+@api_view(['GET'])
+def genre(request, genre):
+    if request.method == 'GET':
+        genreId = get_object_or_404(Genre, genre_name=genre).genre_id
+        movies = Movie.objects.filter(genres=genreId).order_by('-popularity')
+        if len(movies) > 1:
+          seralizer = MovieListSerializer(movies, many=True)
+        else:
+          seralizer = MovieListSerializer(movies)
+        return Response(seralizer.data)

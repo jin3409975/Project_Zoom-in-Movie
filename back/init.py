@@ -60,45 +60,26 @@ for idx, movie_Id in enumerate(movie_Ids):
     json_object = json.loads(json_str)
  
     if json_object.get("poster_path") and json_object.get("backdrop_path"):
-        if json_object.get("genres"):
-            
-            my_object = {
-                "model": "movies.movie",
-                "pk": idx+1,
-                "fields": {
-                    "movie_id": json_object.get("id"),
-                    "title": json_object.get("title"),
-                    "original_title": json_object.get("original_title"),
-                    "overview": json_object.get("overview"),
-                    "poster_path": json_object.get("poster_path"),
-                    "rating": json_object.get("vote_average"),
-                    "release_date": json_object.get("release_date"),
-                    "runtime": json_object.get("runtime"),
-                    "popularity": json_object.get("popularity"),
-                    "adult": json_object.get("adult"),
-                    "backdrop_path": json_object.get("backdrop_path"),
-                    "genres": [json_object.get("genres")[0].get("id")],
-                }  
-            }
-        else:
-            my_object = {
-                "model": "movies.movie",
-                "pk": idx+1,
-                "fields": {
-                    "movie_id": json_object.get("id"),
-                    "title": json_object.get("title"),
-                    "adult": json_object.get("adult"),
-                    "popularity": json_object.get("popularity"),
-                    "poster_path": json_object.get("poster_path"),
-                    "release_date": json_object.get("release_date"),
-                    "runtime": json_object.get("runtime"),
-                    "rating": json_object.get("vote_average"),
-                    "overview": json_object.get("overview"),
-                    "genres": json_object.get("genres"),
-                    "original_title": json_object.get("original_title"),
-                    "backdrop_path": json_object.get("backdrop_path"),
-                }
-            }
+        my_object = {
+            "model": "movies.movie",
+            "pk": idx+1,
+            "fields": {
+                "movie_id": json_object.get("id"),
+                "title": json_object.get("title"),
+                "original_title": json_object.get("original_title"),
+                "overview": json_object.get("overview"),
+                "poster_path": json_object.get("poster_path"),
+                "rating": json_object.get("vote_average"),
+                "release_date": json_object.get("release_date"),
+                "runtime": json_object.get("runtime"),
+                "popularity": json_object.get("popularity"),
+                "adult": json_object.get("adult"),
+                "backdrop_path": json_object.get("backdrop_path"),
+                "genres": [],
+            }  
+        }
+        for genreId in json_object.get("genres"):
+            my_object["fields"]["genres"].append(genreId["id"])
         movie_list.append(my_object)
 
 

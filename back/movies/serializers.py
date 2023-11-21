@@ -24,5 +24,11 @@ class CommentListSerializer(serializers.ModelSerializer):
         model = Comment
         fields = '__all__'
         # read_only_fields = ('Movie', 'user',)
+        
+        
+class GenreListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = '__all__'
 
 
