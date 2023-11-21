@@ -8,7 +8,7 @@ export const useCounterStore = defineStore('account', () => {
   const router = useRouter()
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
-  // const username = ref('')
+  const user = ref([])
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -108,7 +108,21 @@ export const useCounterStore = defineStore('account', () => {
       })
   }
 
+  const findUser = function (userId) {
+    axios({
+      method: 'get',
+      url: `${API_URL}/accounts/user/${userId}/`,
+    })
+      .then((res) => {
+        console.log(res.data)
+        user.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
 
-  return { API_URL, isLogin, token, signUp, signUp_logIn, logIn, logOut }
+
+  return { API_URL, isLogin, token, user, signUp, signUp_logIn, logIn, logOut, findUser }
 }, { persist: true })

@@ -1,7 +1,7 @@
 <template>
   <div class="backSize mainBackColor">
 		<div class="marginMid">
-			<YoutubeTrailer :movieId="route.params.movieId"/>
+			<YoutubeTrailer :movieId="Number(route.params.movieId)"/>
 			<div class="detailDiscriptions">
 				<div class="leftDiscriptions">
 					<h3>{{ movieStore.movie.title }}</h3>
@@ -26,7 +26,7 @@
 					 />
 				</div>
 			</div>
-			<div>
+			<div v-if="false">
 				<h1 class="listTitle">유튜브 관련 영상</h1>
 				<div class="movieList">
 					<YoutubeRelatedCard v-for="i in 20"/>

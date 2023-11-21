@@ -66,3 +66,11 @@ def delete(request):
         request.user.delete()
         auth_logout(request)
     return redirect('articles:index')
+
+
+@api_view(['GET'])
+def user(request, userId):
+    if request.method == 'GET':
+        user = get_object_or_404(get_user_model(), pk=userId)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
