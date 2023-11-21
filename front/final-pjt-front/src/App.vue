@@ -49,7 +49,6 @@ import { useCounterStore } from '@/stores/account.js'
 // import { logOut } from '@/stores/account.js'
 
 const store = useCounterStore()
-const isLogin = store.isLogin
 const movieStore = useMovieStore()
 
 onMounted(() => {
