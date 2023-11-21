@@ -1,19 +1,24 @@
 <template>
-    <div class="movie-card">
+    <div class="movie-card" @mouseenter="isOverlayVisible = true" @mouseleave="isOverlayVisible = !isLiked">
         <img @click="goDetail" class="movie-image" :src="img_url" :alt="movie.title">
-        <div class="movie-overlay">
-            <i class="fa fa-thumbs-up like-icon"></i>
+        <div class="movie-overlay" v-show="isOverlayVisible">
+            <i class="fa fa-thumbs-up like-icon" :class="{ 'liked': isLiked }" @click.stop="toggleLike"></i>
         </div>
     </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
 
 const router = useRouter()
 const props = defineProps({
     movie: Object,
 })
+
+const isOverlayVisible = ref(false)
+const isLiked = ref(false)
 
 const poster_path = props.movie.poster_path
 const img_url = `https://image.tmdb.org/t/p/original${poster_path}`
@@ -22,7 +27,22 @@ const goDetail = function () {
     router.push({ name: 'MovieDetailView', params: { movieId: props.movie.movie_id} })
 }
 
-</script>
+const toggleLike = async () => {
+  isLiked.value = !isLiked.value;
+  isOverlayVisible.value = isLiked.value; // 오버레이 고정/해제
+  
+  try {
+        const response = await axios.post('http://127.0.0.1:5173/<int:my_pk>/<int:movie_id>/like/', {
+            my_pk: 'my_pk', // 실제 사용자 ID로 교체 필요
+            movie_id: props.movie.movie_id, // 영화 ID
+        });
+
+        // 추가적인 상태 업데이트나 UI 처리
+        console.log('Toggle like status:', response.data);
+    } catch (error) {
+        console.error('Error toggling like status:', error);
+    }
+};</script>
 
 <style scoped>
 .movie-card {
@@ -67,5 +87,10 @@ const goDetail = function () {
 
 .like-icon {
   font-size: 3em;
+  transition: color 0.3s ease;
+}
+
+.like-icon.liked {
+  color: #007bff   /* 좋아요를 클릭했을 때의 색상 */
 }
 </style>
