@@ -26,25 +26,40 @@ export const useMovieStore = defineStore('counter', () => {
         console.log(err)
       })
   }
+  // movie 값이 변경되기 전에 리턴되어 예고편 영상이 이전 영화 예고편으로 나오는 코드
+  // const getMovie = function (movieId) {
+  //   axios({
+  //     method: 'get',
+  //     url: `${API_URL}/api/v1/movie/${movieId}/`
+  //   })
+  //     .then((res) =>{
+  //       console.log(res.data)
+  //       movie.value = res.data
+  //       genre.value = movie.value.genres.map((genreId) => {
+  //         return genres.value.filter(g => g.genre_id === genreId)[0].genre_name
+  //       })
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
 
-  const getMovie = function (movieId) {
-    axios({
-      method: 'get',
-      url: `${API_URL}/api/v1/movie/${movieId}/`
-    })
-      .then((res) =>{
-        // console.log(res.data)
-        movie.value = res.data
-      })
-      .then((res) => {
-        genre.value = movie.value.genres.map((genreId) => {
-          return genres.value.filter(g => g.genre_id === genreId)[0].genre_name
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+  const getMovie = async function (movieId) {
+    try {
+      const res = await axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movie/${movieId}/`
+      });
+      // console.log(res.data);
+      movie.value = res.data;
+      genre.value = movie.value.genres.map((genreId) => {
+        return genres.value.filter(g => g.genre_id === genreId)[0].genre_name;
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
+  
 
   const getPopularMovies = function () {
     axios({

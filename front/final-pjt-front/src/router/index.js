@@ -52,7 +52,11 @@ const router = createRouter({
       name: 'RecommendView',
       component: RecommendView
     },
-  ]
+  ],
+  scrollBehavior() {
+    // 페이지 전환 시 스크롤을 맨 위로 이동
+    return { top: 0 }
+  }
 })
 
 export default router

@@ -10,10 +10,10 @@
         </div>
         <!-- 케루젤 이미지 -->
         <div class="carousel-inner marginMid">
-          <div class="carousel-item active" data-bs-interval="4500">
+          <div class="carousel-item active" data-bs-interval="3000">
             <img @click="goDetail(store.movies[0].movie_id)" :src="`https://image.tmdb.org/t/p/original${store.movies[0]?.backdrop_path}`" class="d-block w-100 rounded" alt="#">
           </div>
-          <div v-for="i in 4" class="carousel-item" data-bs-interval="4500">
+          <div v-for="i in 4" class="carousel-item" data-bs-interval="3000">
             <img @click="goDetail(store.movies[i].movie_id)" :src="`https://image.tmdb.org/t/p/original${store.movies[i]?.backdrop_path}`" class="d-block w-100 rounded" alt="#">
           </div>
         </div>
