@@ -21,7 +21,7 @@
         <!-- 로그인 상태에서 보이는 메뉴 -->
         <div v-if="store.isLogin">
           <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
-          <button @click.prevent="store.logOut">logout</button>
+          <a href="#" @click.prevent="store.logOut">logout</a>
         </div>
         <!-- 로그아웃 상태에서 보이는 메뉴 -->
         <div v-else>
