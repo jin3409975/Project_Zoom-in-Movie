@@ -42,14 +42,9 @@ def comment_list(request):
 @permission_classes([IsAuthenticated])
 def comment_create(request, movie_pk):
     movieId = get_object_or_404(Movie, movie_id=movie_pk).id
-    print(movieId)
-    print('#############')
     if request.method == 'GET':
-        comments = get_list_or_404(Comment, movie_id=movieId)
-        if len(comments) > 1:
-          seralizer = MovieListSerializer(comments, many=True)
-        else:
-          seralizer = MovieListSerializer(comments)
+        comments = Comment.objects.filter(movie_id=movieId)
+        seralizer = CommentListSerializer(comments, many=True)
         return Response(seralizer.data)
       
     if request.method == 'POST':

@@ -2,10 +2,12 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { useCounterStore } from './account'
 
 
 export const useMovieStore = defineStore('counter', () => {
   const API_URL = 'http://127.0.0.1:8000'
+  const accountStore = useCounterStore()
   const movie = ref([])
   const movies = ref([])
   const genre = ref([])
@@ -106,7 +108,10 @@ export const useMovieStore = defineStore('counter', () => {
   const getComments = function (moviePk) {
     axios({
       method: 'get',
-      url: `${API_URL}/api/v1/movies/${moviePk}/comment/`
+      url: `${API_URL}/api/v1/movies/${moviePk}/comment/`,
+      headers: {
+        Authorization: `Token ${accountStore.token}`
+      }
     })
       .then((res) =>{
         // console.log(res.data)
