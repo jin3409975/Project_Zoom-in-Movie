@@ -77,7 +77,7 @@ export const useMovieStore = defineStore('counter', () => {
   const getGenreMovie = function (genre) {
     axios({
       method: 'get',
-      url: `${API_URL}/api/v1/genres/${genre}/`
+      url: `${API_URL}/api/v1/genre/${genre}/`
     })
       .then((res) =>{
         // console.log(res.data)

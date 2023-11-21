@@ -21,4 +21,6 @@ urlpatterns = [
 
     path('recommended/', views.recommended, name='recommended'),
     path('current_popularity/', views.current_popularity),
+    path('genres/', views.genres),
+    path('genre/<genre>/', views.genre),
 ]
