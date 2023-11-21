@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.contrib.auth import get_user_model
 from .models import Movie, Comment, Genre, Actor
-from .serializers import MovieListSerializer, CommentListSerializer, MovieSerializer, GenreListSerializer
+from .serializers import MovieListSerializer, CommentListSerializer, MovieSerializer, GenreListSerializer, CommentSerializer
 from accounts.serializers import UserSerializer
 from random import sample
 
@@ -41,16 +41,16 @@ def comment_list(request):
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def comment_create(request, movie_pk):
-    movieId = get_object_or_404(Movie, movie_id=movie_pk).id
+    movie = get_object_or_404(Movie, movie_id=movie_pk)
     if request.method == 'GET':
-        comments = Comment.objects.filter(movie_id=movieId)
+        comments = Comment.objects.filter(movie_id=movie.id).order_by('-created_at')
         seralizer = CommentListSerializer(comments, many=True)
         return Response(seralizer.data)
       
     if request.method == 'POST':
-        serializer = CommentListSerializer(data=request.data)
+        serializer = CommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(movie=movieId, user=request.user)
+            serializer.save(movie=movie, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -59,16 +59,23 @@ def comment_create(request, movie_pk):
 @permission_classes([IsAuthenticated])
 def comment_detail(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
+
+    if not request.user.comment_set.filter(pk=comment_pk).exists():
+        return Response({'message': '권한이 없습니다.'})
+
     if request.method == 'GET':
         serializer = CommentListSerializer(comment)
         return Response(serializer.data)
     
     elif request.method == 'DELETE':
         comment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        data = {
+            'message': '댓글이 삭제되었습니다.'
+        }
+        return Response(data=data, status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'PUT':
-        serializer = CommentListSerializer(comment, data=request.data)
+        serializer = CommentSerializer(comment, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)

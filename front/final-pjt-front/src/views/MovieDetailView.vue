@@ -16,11 +16,11 @@
 			</div>
 			<hr class="">
 			<div class="commentsPlace">
-				<h3 class="commentCnt">댓글 {{ movieStore.comments.length }}개</h3>
+				<h3 class="commentCnt">댓글 {{ comments.length }}개</h3>
 				<div>
-					<CommentCreate/>
+					<CommentCreate :movieId="Number(route.params.movieId)"/>
 					<Comment
-					 v-for="comment in movieStore.comments"
+					 v-for="comment in comments"
 					 :key="comment.id"
 					 :comment="comment"
 					 />
@@ -37,17 +37,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { watch, computed } from 'vue'
 import { useRoute } from 'vue-router';
-import { useMovieStore } from '../stores/movie';
-import Comment from '../components/Comment.Vue';
+import { useMovieStore } from '@/stores/movie';
+import Comment from '@/components/Comment.Vue';
 import CommentCreate from '@/components/CommentCreate.Vue'
-import YoutubeRelatedCard from '../components/YoutubeRelatedCard.vue'
+import YoutubeRelatedCard from '@/components/YoutubeRelatedCard.vue'
 import YoutubeTrailer from '@/components/YoutubeTrailer.vue'
 
 const route = useRoute()
 const movieStore = useMovieStore()
-
+const comments = computed(() => {
+	return movieStore.comments
+})
 
 // 영화 및 댓글
 watch(() => route.params.movieId, (newMovieId) => {
@@ -55,6 +57,10 @@ watch(() => route.params.movieId, (newMovieId) => {
   movieStore.getMovie(newMovieId);
   movieStore.getComments(newMovieId);
 }, { immediate: true });
+
+watch(movieStore.comments, (newComments) => {
+	movieStore.comments = newComments
+})
 </script>
   
 <style scoped>

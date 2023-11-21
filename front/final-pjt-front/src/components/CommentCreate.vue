@@ -2,7 +2,7 @@
   <div class="commentCreateDiv">
     <img class="commentProfile" src="https://assets.request-support.com/images/no_profile.gif?ver=1" alt="profile_image">
     <form @submit.prevent="createComment">
-      <textarea name="content" id="content" placeholder="댓글을 입력해주세요. &#13;&#10;스포성 댓글은 규정 위반이며 무통보 삭제 처리 될 수 있습니다."></textarea>
+      <textarea v-model.trim="content" name="content" id="content" placeholder="댓글을 입력해주세요. &#13;&#10;스포성 댓글은 규정 위반이며 무통보 삭제 처리 될 수 있습니다."></textarea>
       <hr>
       <button>댓글 작성</button>
     </form>
@@ -10,6 +10,28 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { useMovieStore } from '../stores/movie';
+
+const movieStore = useMovieStore()
+const props = defineProps({
+  movieId: Number,
+})
+const content = ref(null)
+
+const createComment = function () {
+  if (!content.value) {
+    alert('내용을 입력해주세요!')
+    return
+  }
+
+  const payload = {
+    movieId: props.movieId,
+    content: content.value,
+  }
+  movieStore.createComment(payload)
+  content.value=''
+}
 
 </script>
 
@@ -42,16 +64,17 @@ form button {
   display: block;
   margin: 0 0 0 auto;
   padding: 10px 20px;
-  background-color: rgb(248, 47, 98, 0.3);
+  background-image: linear-gradient(-90deg, #ff6b6b 0%, #c0392b 100%);
   color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s;
 }
 
 form button:hover {
-  background-color: rgb(248, 47, 98, 0.6);
+  background-image: linear-gradient(-90deg, #ff8c8c 0%, #e74c3c 100%);
   transform: scale(1.05);
 }
 

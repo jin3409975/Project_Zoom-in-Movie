@@ -5,10 +5,12 @@ import axios from 'axios'
 
 
 export const useCounterStore = defineStore('account', () => {
+  const accountStore = useCounterStore();
   const router = useRouter()
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   const user = ref([])
+  const loginUser = ref(null)
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -16,6 +18,23 @@ export const useCounterStore = defineStore('account', () => {
       return true
     }
   })
+
+  const checkLoginUser = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/accounts/loginUser/`,
+      headers: {
+        Authorization: `Token ${accountStore.token}`
+      }
+    })
+      .then((res) =>{
+        // console.log(res.data)
+        loginUser.value = { id: res.data.userId, username: res.data.username }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
 
   // 회원가입
@@ -61,6 +80,7 @@ export const useCounterStore = defineStore('account', () => {
       .then((res) => {
         // console.log(res.data)
         token.value = res.data.key
+        accountStore.checkLoginUser()
         router.push({ name: 'RecommendChoiceView' })
       })
       .catch((err) => {
@@ -81,9 +101,9 @@ export const useCounterStore = defineStore('account', () => {
       }
     })
       .then((res) => {
-        // console.log(res.data)
-        // username.value = res.data.username
+        // console.log(res)
         token.value = res.data.key
+        accountStore.checkLoginUser()
         router.push({ name: 'MainView' })
       })
       .catch((err) => {
@@ -101,6 +121,7 @@ export const useCounterStore = defineStore('account', () => {
     })
       .then((res) => {
         token.value = null
+        loginUser.value = null
         router.push({ name: 'MainView' })
       })
       .catch((err) => {
@@ -113,9 +134,9 @@ export const useCounterStore = defineStore('account', () => {
       method: 'get',
       url: `${API_URL}/accounts/user/${userId}/`,
     })
-      .then((res) => {
-        // console.log(res.data)
-        user.value = res.data
+    .then((res) => {
+        // console.log(res.data.username)
+        user.value = res.data.username
       })
       .catch((err) => {
         console.log(err)
@@ -124,5 +145,7 @@ export const useCounterStore = defineStore('account', () => {
 
 
 
-  return { API_URL, isLogin, token, user, signUp, signUp_logIn, logIn, logOut, findUser }
+  return { API_URL, isLogin, token, user, loginUser,
+    signUp, signUp_logIn, logIn, logOut, findUser, checkLoginUser,
+  }
 }, { persist: true })
