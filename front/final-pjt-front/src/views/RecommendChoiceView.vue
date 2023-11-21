@@ -10,16 +10,18 @@
                 @click="checkMovie(movie.id)" v-for="movie in store.movies" :key="movie.id" :movie="movie" 
                  />
             </div>
-            <button v-if="selectedMovies.length === 3" @click="completeSelection">컨텐츠 선택 완료></button>
+            <button v-if="selectedMovies.length === 3" @click="completeSelection">콘텐츠 선택 완료</button>
         </div>
     </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
-import { useMovieStore } from '../stores/movie';
+import { useMovieStore } from '../stores/movie'
 import MoviePoster from '../components/MoviePoster.vue'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
 
 
 const store = useMovieStore()
@@ -28,7 +30,31 @@ onMounted(() => {
   store.getPopularMovies()
 })
 
+const router = useRouter()
 const selectedMovies = ref([])
+const completeSelection = async function () {
+    console.log("선택된 영화:", selectedMovies.value)
+
+    try {
+        // 선택된 영화 목록을 Django로 전송
+        const response = await axios.post('http://127.0.0.1:5173/<int:user_pk>/like/comment/', {
+            like_movies: selectedMovies.value,
+            // 다른 필요한 데이터가 있다면 여기에 추가
+        })
+
+        // Django에서 반환한 데이터를 콘솔에 출력
+        console.log('Response from Django:', response.data);
+
+        // 여기에서 필요한 UI 업데이트나 라우팅 등을 수행할 수 있습니다.
+
+    } catch (error) {
+        console.error('Error sending selected movies:', error);
+    }
+
+    // 선택이 완료되면 MainView로 이동
+    router.push({ name: 'MainView' })
+}
+
 
 // 클릭하면서 함수 안에서 포스터를 체크해서 css를 적용해주고 
 // css는 이거 >> .movie-card:hover .movie-overlay {opacity: 1;}
@@ -39,10 +65,6 @@ const checkMovie = function (movieId) {
     }
 }
 
-const completeSelection = function () {
-    // 여기에 선택 완료 후 실행할 로직 추가
-    console.log("선택된 영화:", selectedMovies.value)
-}
 </script>
 
 <style scoped>
