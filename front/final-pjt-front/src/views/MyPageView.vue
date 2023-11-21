@@ -3,7 +3,7 @@
         <div class="mypage-container">
             <div class="mypage-header">
                 <img class="mypage-avatar" src="https://assets.request-support.com/images/no_profile.gif?ver=1" alt="Profile Avatar">
-                <h1 class="listTitle">프로필 변경</h1>
+                <h1 class="listTitle">###</h1>
             </div>
             <form class="mypage-form">
                 <label for="username">사용자명</label>

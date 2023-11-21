@@ -8,6 +8,7 @@ export const useCounterStore = defineStore('account', () => {
   const router = useRouter()
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
+  // const username = ref('')
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -81,6 +82,7 @@ export const useCounterStore = defineStore('account', () => {
     })
       .then((res) => {
         // console.log(res.data)
+        // username.value = res.data.username
         token.value = res.data.key
         router.push({ name: 'MainView' })
       })

@@ -1,6 +1,6 @@
 <template>
     <div class="movie-card">
-        <img src="https://occ-0-988-993.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABesSOhEyU1dvhMddc-kG6avKE43CcZXZRSuDfkJMSU0xHvkEf7sRW0kTCvYQXxkd0x0HWZ7BtgzJgU-J9oFPc5P7LIlvPlhb3A.jpg?r=dae" alt="Movie Title" class="movie-image">
+        <img @click="goDetail" class="movie-image" :src="img_url" :alt="movie.title">
         <div class="movie-overlay">
             <i class="fa fa-thumbs-up like-icon"></i>
         </div>
@@ -8,6 +8,19 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+const props = defineProps({
+    movie: Object,
+})
+
+const poster_path = props.movie.poster_path
+const img_url = `https://image.tmdb.org/t/p/original${poster_path}`
+
+const goDetail = function () {
+    router.push({ name: 'MovieDetailView', params: { movieId: props.movie.movie_id} })
+}
 
 </script>
 

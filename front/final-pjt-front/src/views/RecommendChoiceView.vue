@@ -6,41 +6,24 @@
                 <p>취향에 꼭 맞는 시리즈와 영화를 찾아드리는 데 도움이 됩니다. 마음에 드는 콘텐츠를 선택하세요.</p>
             </div>
             <div class="movieList">
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
-                <MoviePoster/>
+                <MoviePoster 
+                v-for="movie in store.movies" :key="movie.id" :movie="movie" 
+                 />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+import { useMovieStore } from '../stores/movie';
 import MoviePoster from '../components/MoviePoster.vue';
+
+const store = useMovieStore()
+
+onMounted(() => {
+  store.getPopularMovies()
+})
 </script>
 
 <style scoped>
