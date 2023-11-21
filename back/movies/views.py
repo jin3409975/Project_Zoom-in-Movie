@@ -41,9 +41,11 @@ def comment_list(request):
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def comment_create(request, movie_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
+    movieId = get_object_or_404(Movie, movie_id=movie_pk).id
+    print(movieId)
+    print('#############')
     if request.method == 'GET':
-        comments = get_list_or_404(Comment, movie=movie)
+        comments = get_list_or_404(Comment, movie_id=movieId)
         if len(comments) > 1:
           seralizer = MovieListSerializer(comments, many=True)
         else:
@@ -53,7 +55,7 @@ def comment_create(request, movie_pk):
     if request.method == 'POST':
         serializer = CommentListSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(movie=movie, user=request.user)
+            serializer.save(movie=movieId, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 

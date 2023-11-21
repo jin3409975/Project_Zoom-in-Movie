@@ -1,9 +1,7 @@
 <template>
   <div class="backSize mainBackColor">
 		<div class="marginMid">
-			<div class="videoDiv marginMid">
-				<iframe width="560" height="315" :src="videoUrl" frameborder="0" allowfullscreen></iframe>
-			</div>
+			<YoutubeTrailer :movieId="route.params.movieId"/>
 			<div class="detailDiscriptions">
 				<div class="leftDiscriptions">
 					<h3>{{ movieStore.movie.title }}</h3>
@@ -41,49 +39,23 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router';
-import axios from 'axios'
 import { useMovieStore } from '../stores/movie';
-import { useCounterStore } from '../stores/account';
 import Comment from '../components/Comment.Vue';
 import CommentCreate from '@/components/CommentCreate.Vue'
 import YoutubeRelatedCard from '../components/YoutubeRelatedCard.vue'
+import YoutubeTrailer from '@/components/YoutubeTrailer.vue'
 
 const route = useRoute()
-const accountStore = useCounterStore()
 const movieStore = useMovieStore()
-const apiKey = import.meta.env.VITE_YOUTUBE_KEY
-const videoId =  ref(null)
-const videoUrl = ref(null)
-
-// 예고편
-onMounted(() => {
-	movieStore.getMovie(route.params.movieId);
-	axios({
-		method: 'get',
-		url: `https://www.googleapis.com/youtube/v3/search`,
-		params: {
-			part: 'snippet',
-			q: `${movieStore.movie.title} 공식 예고편`,
-			type: 'video',
-			key: apiKey
-		}
-	})
-		.then((res) => {
-			videoId.value = res.data.items[0].id.videoId
-			videoUrl.value = `https://www.youtube.com/embed/${videoId.value}`;
-		})
-		.catch((err) => {
-			console.log(err)
-		})
-
-})
-
-// 댓글
 const commentCnt = ref(null)
-onMounted(() => {
-	movieStore.getComments(route.params.movieId)
+
+// 영화 및 댓글
+watch(() => route.params.movieId, (newMovieId) => {
+	window.scrollTo(0, 0);
+  movieStore.getMovie(newMovieId);
+  movieStore.getComments(newMovieId);
 	commentCnt.value = movieStore.comments.length
-})
+}, { immediate: true });
 </script>
   
 <style scoped>
@@ -116,15 +88,5 @@ onMounted(() => {
 .leftAlignedTitle {
   text-align: left;
   margin-left: 15px;
-}
-
-
-.videoDiv {
-	display: flex;
-	justify-content: center;
-}
-
-.videoDiv iframe {
-	border-radius: 8px;
 }
 </style>
