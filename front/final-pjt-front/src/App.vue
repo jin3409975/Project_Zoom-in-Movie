@@ -18,11 +18,15 @@
           </div>
           <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
         </div>
-        <div>
-          <RouterLink v-if="isLogin" :to="{ name: 'MyPageView' }">mypage</RouterLink>
-          <RouterLink v-if="!isLogin" :to="{ name: 'SignUpView' }">signup</RouterLink>
-          <RouterLink v-if="!isLogin" :to="{ name: 'LoginView' }">login</RouterLink>
-          <button @click="logOut">logout</button>
+        <!-- 로그인 상태에서 보이는 메뉴 -->
+        <div v-if="store.isLogin">
+          <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
+          <button @click.prevent="store.logOut">logout</button>
+        </div>
+        <!-- 로그아웃 상태에서 보이는 메뉴 -->
+        <div v-else>
+          <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
+          <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
         </div>
         <!-- 준비중 -->
         <div v-if="false">
@@ -46,7 +50,6 @@ import { useMovieStore } from '@/stores/movie.js'
 import { RouterLink, RouterView } from 'vue-router'
 import ProFile from './components/ProFile.vue'
 import { useCounterStore } from '@/stores/account.js'
-// import { logOut } from '@/stores/account.js'
 
 const store = useCounterStore()
 const movieStore = useMovieStore()
@@ -57,7 +60,6 @@ onMounted(() => {
   }
 })
 
-const logOut = store.logOut
 
 </script>
 

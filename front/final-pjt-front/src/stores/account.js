@@ -32,7 +32,7 @@ export const useCounterStore = defineStore('account', () => {
 
     })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         const password = password1
         signUp_logIn({ username, password })
         // 회원가입 후에 자동으로 로그인 되도록.  
@@ -58,7 +58,7 @@ export const useCounterStore = defineStore('account', () => {
       }
     })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         token.value = res.data.key
         router.push({ name: 'RecommendChoiceView' })
       })
@@ -80,7 +80,7 @@ export const useCounterStore = defineStore('account', () => {
       }
     })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         token.value = res.data.key
         router.push({ name: 'MainView' })
       })
