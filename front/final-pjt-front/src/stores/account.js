@@ -39,7 +39,7 @@ export const useCounterStore = defineStore('account', () => {
         // 회원가입 후에 자동으로 로그인 되도록.  
         
         // token.value = res.data.key
-        // router.push({ name: 'MainView' })
+        router.push({ name: 'RecommendChoiceView' })
       })
       .catch((err) => {
         console.log(err)

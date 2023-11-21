@@ -22,7 +22,7 @@
           <RouterLink v-if="isLogin" :to="{ name: 'MyPageView' }">mypage</RouterLink>
           <RouterLink v-if="!isLogin" :to="{ name: 'SignUpView' }">signup</RouterLink>
           <RouterLink v-if="!isLogin" :to="{ name: 'LoginView' }">login</RouterLink>
-          <RouterLink v-if="isLogin" :to="{ name: 'LogoutView' }">logout</RouterLink>
+          <button @click="logOut">logout</button>
         </div>
         <!-- 준비중 -->
         <div v-if="false">
@@ -46,6 +46,7 @@ import { useMovieStore } from '@/stores/movie.js'
 import { RouterLink, RouterView } from 'vue-router'
 import ProFile from './components/ProFile.vue'
 import { useCounterStore } from '@/stores/account.js'
+// import { logOut } from '@/stores/account.js'
 
 const store = useCounterStore()
 const isLogin = store.isLogin
@@ -56,6 +57,9 @@ onMounted(() => {
     movieStore.getGenres()
   }
 })
+
+const logOut = store.logOut
+
 </script>
 
 
