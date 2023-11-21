@@ -14,7 +14,6 @@ export const useCounterStore = defineStore('account', () => {
     } else {
       return true
     }
-    // return token.value !== null && token.value !== undefined
   })
 
 
