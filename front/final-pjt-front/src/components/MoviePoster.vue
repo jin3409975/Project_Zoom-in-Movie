@@ -1,5 +1,5 @@
 <template>
-    <div class="movie-card" @mouseenter="isOverlayVisible = true" @mouseleave="isOverlayVisible = !isLiked">
+    <div class="movie-card" @mouseenter="showOverlay" @mouseleave="hideOverlay">
         <img @click="goDetail" class="movie-image" :src="img_url" :alt="movie.title">
         <div class="movie-overlay" v-show="isOverlayVisible">
             <i class="fa fa-thumbs-up like-icon" :class="{ 'liked': isLiked }" @click.stop="toggleLike"></i>
@@ -28,21 +28,21 @@ const goDetail = function () {
 }
 
 const toggleLike = async () => {
-  isLiked.value = !isLiked.value;
-  isOverlayVisible.value = isLiked.value; // 오버레이 고정/해제
-  
-  try {
-        const response = await axios.post('http://127.0.0.1:5173/<int:my_pk>/<int:movie_id>/like/', {
-            my_pk: 'my_pk', // 실제 사용자 ID로 교체 필요
-            movie_id: props.movie.movie_id, // 영화 ID
-        });
+  isLiked.value = !isLiked.value
+  isOverlayVisible.value = true
+}
 
-        // 추가적인 상태 업데이트나 UI 처리
-        console.log('Toggle like status:', response.data);
-    } catch (error) {
-        console.error('Error toggling like status:', error);
-    }
-};</script>
+const showOverlay = () => {
+  // 마우스가 올라왔을 때 오버레이를 보여줌
+  isOverlayVisible.value = true;
+}
+
+const hideOverlay = () => {
+  isOverlayVisible.value = true
+}
+
+
+</script>
 
 <style scoped>
 .movie-card {
@@ -66,7 +66,7 @@ const toggleLike = async () => {
 .movie-overlay {
   width: 200px;
   position: absolute;
-  top: 0;
+  top: 0; 
   left: 0;
   right: 0;
   bottom: 0;
@@ -84,7 +84,6 @@ const toggleLike = async () => {
 .movie-card:hover .movie-overlay {
   opacity: 1;
 }
-
 .like-icon {
   font-size: 3em;
   transition: color 0.3s ease;
