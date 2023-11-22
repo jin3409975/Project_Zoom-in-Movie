@@ -51,12 +51,12 @@ export const useCounterStore = defineStore('account', () => {
     })
       .then((res) => {
         // // 회원가입 후에 자동으로 로그인 되도록.  
-        // const password = password1
-        // signUp_logIn({ username, password })
+        const password = password1
+        logIn({ username, password })
         
         // console.log(res.data)
         // token.value = res.data.key
-        router.push({ name: 'MainView' })
+        // router.push({ name: 'MainView' })
       })
       .catch((err) => {
         console.log(err)
