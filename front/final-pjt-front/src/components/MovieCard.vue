@@ -34,7 +34,7 @@ const goDetail = function () {
 }
 
 .movie-card:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     cursor: pointer;
 }
 

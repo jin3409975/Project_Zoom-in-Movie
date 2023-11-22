@@ -16,8 +16,6 @@
               </RouterLink>
             </div>
           </div>
-          <!-- 사실 사용자에게 메뉴로 노출되면 안 됨. -->
-          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
         </div>
         <!-- 로그인 상태에서 보이는 메뉴 -->
         <div v-if="store.isLogin">
@@ -32,6 +30,8 @@
         <div v-if="false">
           <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
           <ProFile/>
+          <!-- 사실 사용자에게 메뉴로 노출되면 안 됨. -->
+          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
         </div>
       </nav>
     </header>
