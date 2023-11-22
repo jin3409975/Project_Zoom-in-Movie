@@ -24,13 +24,12 @@ const goDetail = function () {
 
 <style scoped>
 .movie-card {
-    width: 300px;
+    width: 22%;
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease-in-out;
-    margin-bottom: 11px;
-    /* margin: 20px; */
+    margin-bottom: 5%;
 }
 
 .movie-card:hover {
@@ -40,6 +39,7 @@ const goDetail = function () {
 
 .movie-image {
     width: 100%;
+    height: 100%;
     display: block;
 }
 

@@ -4,9 +4,6 @@ import CategoryView from '@/views/CategoryView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import MovieDetailView from '@/views/MovieDetailView.vue'
 import LoginView from '@/views/LoginView.vue'
-import LogoutView from '@/views/LogoutView.vue'
-import MyPageView from '@/views/MyPageView.vue'
-import RecommendChoiceView from '@/views/RecommendChoiceView.vue'
 import RecommendView from '@/views/RecommendView.vue'
 
 const router = createRouter({
@@ -37,6 +34,11 @@ const router = createRouter({
       name: 'MovieDetailView',
       component: MovieDetailView
     },
+    {
+      path: '/recommend',
+      name: 'RecommendView',
+      component: RecommendView
+    },
     // {
     //   path: '/mypage',
     //   name: 'MyPageView',
@@ -47,11 +49,6 @@ const router = createRouter({
     //   name: 'RecommendChoiceView',
     //   component: RecommendChoiceView
     // },
-    {
-      path: '/recommend',
-      name: 'RecommendView',
-      component: RecommendView
-    },
   ],
   scrollBehavior() {
     // 페이지 전환 시 스크롤을 맨 위로 이동

@@ -79,7 +79,7 @@ const updateComment = function () {
 	margin-bottom: 20px;
 	color: white;
 	display: flex;
-	align-items: start; /* 상단 정렬을 위해 추가 */
+	align-items: start;
 }
 
 .commentPlace div {
@@ -103,7 +103,7 @@ const updateComment = function () {
 	display: block;
 	font-size: 14px;
 	font-weight: 400;
-	margin-bottom: 10px; /* 내용과 버튼 사이의 간격 추가 */
+	margin-bottom: 10px;
 }
 
 .commentBtn {

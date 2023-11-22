@@ -39,9 +39,7 @@ export const useCounterStore = defineStore('account', () => {
 
   // 회원가입
   const signUp = function (payload) {
-    const username = payload.username
-    const password1 = payload.password1
-    const password2 = payload.password2
+    const { username, password1, password2 } = payload
 
     axios({
       method: 'post',
@@ -52,13 +50,13 @@ export const useCounterStore = defineStore('account', () => {
 
     })
       .then((res) => {
-        // console.log(res.data)
-        const password = password1
-        signUp_logIn({ username, password })
-        // 회원가입 후에 자동으로 로그인 되도록.  
+        // // 회원가입 후에 자동으로 로그인 되도록.  
+        // const password = password1
+        // signUp_logIn({ username, password })
         
+        // console.log(res.data)
         // token.value = res.data.key
-        // router.push({ name: 'RecommendChoiceView' })
+        router.push({ name: 'MainView' })
       })
       .catch((err) => {
         console.log(err)
@@ -67,27 +65,27 @@ export const useCounterStore = defineStore('account', () => {
   }
 
   // 회원가입 후 자동 로그인 >> 영화 선택 페이지로 넘어가.
-  const signUp_logIn = function (payload) {
-    const { username, password } = payload
+  // const signUp_logIn = function (payload) {
+  //   const { username, password } = payload
 
-    axios({
-      method: 'post',
-      url: `${API_URL}/accounts/login/`,
-      data: {
-        username, password
-      }
-    })
-      .then((res) => {
-        // console.log(res.data)
-        token.value = res.data.key
-        accountStore.checkLoginUser()
-        router.push({ name: 'RecommendChoiceView' })
-      })
-      .catch((err) => {
-        console.log(err)
-        alert('아이디 또는 비밀번호가 일치하지 않습니다.')
-      })
-  }
+  //   axios({
+  //     method: 'post',
+  //     url: `${API_URL}/accounts/login/`,
+  //     data: {
+  //       username, password
+  //     }
+  //   })
+  //     .then((res) => {
+  //       // console.log(res.data)
+  //       token.value = res.data.key
+  //       accountStore.checkLoginUser()
+  //       router.push({ name: 'RecommendChoiceView' })
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       alert('아이디 또는 비밀번호가 일치하지 않습니다.')
+  //     })
+  // }
 
   // 로그인
   const logIn = function (payload) {
@@ -142,10 +140,7 @@ export const useCounterStore = defineStore('account', () => {
         console.log(err)
       })
   }
-
-
-
   return { API_URL, isLogin, token, user, loginUser,
-    signUp, signUp_logIn, logIn, logOut, findUser, checkLoginUser,
+    signUp, logIn, logOut, findUser, checkLoginUser,
   }
 }, { persist: true })

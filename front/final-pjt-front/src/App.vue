@@ -113,11 +113,10 @@ hr {
 
 .movieList {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 20px 0;
+  gap: 0.1%;
+  margin-top: 15px;
 }
 
 .max_w1000 {
