@@ -10,6 +10,7 @@ export const useMovieStore = defineStore('counter', () => {
   const accountStore = useCounterStore()
   const movie = ref([])
   const movies = ref([])
+  const recommendMovies = ref([])
   const genre = ref([])
   const genres = ref([])
   const comment = ref([])
@@ -223,10 +224,26 @@ export const useMovieStore = defineStore('counter', () => {
         console.log(err)
       })
   }
-  return { movie, movies, genre, genres, comment, comments, isLiked,
+
+  const movieRecommend = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/api/v1/recommend/`,
+      headers: {
+        Authorization: `Token ${accountStore.token}`
+      }
+    })
+      .then((res) =>{
+        console.log(res.data)
+        recommendMovies.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  return { movie, movies, genre, genres, comment, comments, isLiked, recommendMovies,
     getMovies, getMovie, getPopularMovies, getGenres, getGenreMovie,
     getComments, deleteComment, createComment, updateComment, updateLikeMovie,
-    checkLikeMovie, 
-
+    checkLikeMovie, movieRecommend,
   }
 }, { persist: true })

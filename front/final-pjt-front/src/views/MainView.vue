@@ -30,12 +30,14 @@
     </div>
 
     <!-- 인기순 -->
-    <h1 class="listTitle">일단넘겨 인기 콘텐츠</h1>
-    <main class="movieList">
-      <MovieCard 
-      v-for="movie in store.movies" :key="movie.id" :movie="movie" 
-      class="movieCard"/>
-    </main>
+    <div class="main-main">
+      <h1 class="listTitle">일단넘겨 인기 콘텐츠</h1>
+      <main class="movieList">
+        <MovieCard 
+        v-for="movie in store.movies" :key="movie.id" :movie="movie" 
+        class="movieCard"/>
+      </main>
+    </div>
 
   </div>
 </template>
@@ -60,6 +62,10 @@ const goDetail = function (movieId) {
 </script>
 
 <style scoped>
+.main-main {
+  margin-top: 1%;
+}
+
 /* 캐러셀 기본 설정 */
 .carouselSize {
 	height: 50vh;
