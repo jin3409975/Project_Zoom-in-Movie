@@ -9,10 +9,10 @@ urlpatterns = [
     path('movies/<int:movie_pk>/comment/', views.comment_create),
 
     path('recommend/', views.recommend),
-    path('<int:my_pk>/<int:movie_id>/like/', views.movie_like),
+    path('like_movie/<int:movie_id>/', views.movie_like),
     path('<int:my_pk>/<int:movie_id>/is_liked/', views.is_liked),
-    path('<int:my_pk>/like/', views.my_movie_like),
-    path('<int:my_pk>/like/users/', views.like_movie_users),
+    # path('<int:my_pk>/like/', views.my_movie_like),
+    # path('<int:my_pk>/like/users/', views.like_movie_users),
     
     #
     path('<int:user_pk>/like/comment/', views.user_like_movies),

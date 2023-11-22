@@ -8,8 +8,8 @@
 				<div class="commentTitle">{{ writer }}: </div>
 				<form @submit.prevent="updateComment" class="updateForm">
 					<textarea class="commentContent" v-model.trim="content" name="content" id="content"></textarea>
-					<button v-if="isLoginUserComment" class="commentBtn">수정</button>
-					<button class="commentBtn" @click="isEdit=!isEdit">취소</button>
+					<button v-if="isLoginUserComment" class="commentBtn leftBtn">수정</button>
+					<button class="commentBtn rightBtn" @click="isEdit=!isEdit">취소</button>
 				</form>
 			</div>
 		</div>
@@ -24,8 +24,8 @@
 				<div class="commentTitle">{{ writer }}: </div>
 				<div class="commentContent">{{ comment.content }}</div>
 			</div>
-			<button v-if="isLoginUserComment" class="commentBtn" @click="isUpdate">수정</button>
-			<button v-if="isLoginUserComment" class="commentBtn" @click="deleteComment">삭제</button>
+			<button v-if="isLoginUserComment" class="commentBtn leftBtn" @click="isUpdate">수정</button>
+			<button v-if="isLoginUserComment" class="commentBtn rightBtn" @click="deleteComment">삭제</button>
 		</div>
 	</div>
 </template>
@@ -109,16 +109,28 @@ const updateComment = function () {
 .commentBtn {
 	height: 30px;
 	width: 60px;
-	background-image: linear-gradient(-90deg, #ff6b6b 0%, #c0392b 100%);
 	color: white;
 	border: none;
-	border-radius: 5px;
 	cursor: pointer;
 	transition: background-color 0.3s;
 }
 
-.commentBtn:hover {
+.leftBtn {
+	border-radius: 5px 0 0 5px;
+	background-image: linear-gradient(-90deg, #ff6b6b 0%, #c0392b 100%);
+}
+
+.rightBtn {
+	border-radius: 0 5px 5px 0;
+	background-image: linear-gradient(90deg, #ff6b6b 0%, #c0392b 100%);
+}
+
+.leftBtn:hover {
 	background-image: linear-gradient(-90deg, #ff8c8c 0%, #e74c3c 100%);
+}
+
+.rightBtn:hover {
+	background-image: linear-gradient(90deg, #ff8c8c 0%, #e74c3c 100%);
 }
 
 

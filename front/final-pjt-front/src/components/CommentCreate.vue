@@ -2,7 +2,7 @@
   <div class="commentCreateDiv">
     <img class="commentProfile" src="https://assets.request-support.com/images/no_profile.gif?ver=1" alt="profile_image">
     <form @submit.prevent="createComment">
-      <textarea v-model.trim="content" name="content" id="content" placeholder="댓글을 입력해주세요. &#13;&#10;스포성 댓글은 규정 위반이며 무통보 삭제 처리 될 수 있습니다."></textarea>
+      <input v-model.trim="content" name="content" id="content" placeholder="댓글을 입력해주세요. &#13;&#10;스포성 댓글은 규정 위반이며 무통보 삭제 처리 될 수 있습니다.">
       <hr>
       <button>댓글 작성</button>
     </form>
@@ -44,7 +44,7 @@ form {
   width: 100%;
 }
 
-form textarea {
+form input {
   background: none;
   border: none;
   width: 100%;
@@ -54,7 +54,7 @@ form textarea {
   color: white;
 }
 
-textarea::placeholder {
+input::placeholder {
   white-space: pre-line;
   opacity: 0.5;
   font-size: 15px;

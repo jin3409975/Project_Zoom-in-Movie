@@ -4,17 +4,21 @@
 			<YoutubeTrailer :movieId="Number(route.params.movieId)"/>
 			<div class="detailDiscriptions">
 				<div class="leftDiscriptions">
-					<h3>{{ movieStore.movie.title }}</h3>
+					<div class="titlePlace">
+						<h3>{{ movieStore.movie.title }} </h3> 
+						<LikeBtn :thisId="Number(route.params.movieId)"/>
+					</div>
 					<p>{{ movieStore.movie.overview }}</p>
 				</div>
 				<div class="rightDiscriptions">
-					<p>출연: 정보 추가 중</p>
+					<p>출연: 정보 추가 중 </p>
 					<p>장르: 
 						<span v-for="genre in movieStore.genre">{{ genre }}&nbsp;</span>
 					</p>
 				</div>
+				
 			</div>
-			<hr class="">
+			<hr>
 			<div class="commentsPlace">
 				<h3 class="commentCnt">댓글 {{ comments.length }}개</h3>
 				<div>
@@ -44,6 +48,7 @@ import Comment from '@/components/Comment.Vue';
 import CommentCreate from '@/components/CommentCreate.Vue'
 import YoutubeRelatedCard from '@/components/YoutubeRelatedCard.vue'
 import YoutubeTrailer from '@/components/YoutubeTrailer.vue'
+import LikeBtn from '../components/LikeBtn.vue';
 
 const route = useRoute()
 const movieStore = useMovieStore()
@@ -93,5 +98,15 @@ watch(movieStore.comments, (newComments) => {
 .leftAlignedTitle {
   text-align: left;
   margin-left: 15px;
+}
+
+.titlePlace{
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.titlePlace h3{
+	margin: 0;
 }
 </style>

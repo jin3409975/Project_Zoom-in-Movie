@@ -131,17 +131,23 @@ def recommend(request):
 
 
 ### 영화 좋아요 ###
-@api_view(['POST'])
-def movie_like(request, my_pk, movie_id):
+@api_view(['GET', 'POST'])
+def movie_like(request, movie_id):
   movie = get_object_or_404(Movie, movie_id=movie_id)
-  me = get_object_or_404(get_user_model(), pk=my_pk)
-  if me.like_movies.filter(pk=movie.pk).exists():
-      me.like_movies.remove(movie.pk)
-      liking = False
-      
-  else:
-      me.like_movies.add(movie.pk)
-      liking = True
+  me = request.user
+  if request.method == 'GET':
+    if me.like_movies.filter(pk=movie.pk).exists():
+        liking = True
+    else:
+        liking = False
+  
+  if request.method == 'POST':
+    if me.like_movies.filter(pk=movie.pk).exists():
+        me.like_movies.remove(movie.pk)
+        liking = False
+    else:
+        me.like_movies.add(movie.pk)
+        liking = True
   
   return Response(liking)
 

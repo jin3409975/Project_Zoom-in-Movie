@@ -14,6 +14,7 @@ export const useMovieStore = defineStore('counter', () => {
   const genres = ref([])
   const comment = ref([])
   const comments = ref([])
+  const isLiked = ref(false)
 
   // DRF에 article 조회 요청을 보내는 action
   const getMovies = function () {
@@ -189,8 +190,43 @@ export const useMovieStore = defineStore('counter', () => {
       })
   }
 
-  return { movie, movies, genre, genres, comment, comments,
+  const updateLikeMovie = function (movieId) {
+    axios({
+      method: 'post',
+      url: `${API_URL}/api/v1/like_movie/${movieId}/`,
+      headers: {
+        Authorization: `Token ${accountStore.token}`
+      }
+    })
+      .then((res) =>{
+        // console.log(res.data)
+        isLiked.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  
+  const checkLikeMovie = function (movieId) {
+    axios({
+      method: 'get',
+      url: `${API_URL}/api/v1/like_movie/${movieId}/`,
+      headers: {
+        Authorization: `Token ${accountStore.token}`
+      }
+    })
+      .then((res) =>{
+        // console.log(res.data)
+        isLiked.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  return { movie, movies, genre, genres, comment, comments, isLiked,
     getMovies, getMovie, getPopularMovies, getGenres, getGenreMovie,
-    getComments, deleteComment, createComment, updateComment,
+    getComments, deleteComment, createComment, updateComment, updateLikeMovie,
+    checkLikeMovie, 
+
   }
 }, { persist: true })

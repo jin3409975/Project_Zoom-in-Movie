@@ -37,16 +37,16 @@ const router = createRouter({
       name: 'MovieDetailView',
       component: MovieDetailView
     },
-    {
-      path: '/mypage',
-      name: 'MyPageView',
-      component: MyPageView
-    },
-    {
-      path: '/choice',
-      name: 'RecommendChoiceView',
-      component: RecommendChoiceView
-    },
+    // {
+    //   path: '/mypage',
+    //   name: 'MyPageView',
+    //   component: MyPageView
+    // },
+    // {
+    //   path: '/choice',
+    //   name: 'RecommendChoiceView',
+    //   component: RecommendChoiceView
+    // },
     {
       path: '/recommend',
       name: 'RecommendView',
