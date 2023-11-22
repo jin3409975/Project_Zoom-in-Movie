@@ -1,7 +1,8 @@
 <template>
   <div class="backSize mainBackColor">
 		<div class="marginMid">
-			<YoutubeTrailer :movieId="Number(route.params.movieId)"/>
+			<!-- <YoutubeTrailer :movieId="Number(route.params.movieId)"/> -->
+			<YoutubeTrailer :movieTitle="movieStore.movie.title"/>
 			<div class="detailDiscriptions">
 				<div class="leftDiscriptions">
 					<div class="titlePlace">
