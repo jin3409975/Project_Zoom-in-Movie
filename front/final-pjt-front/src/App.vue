@@ -138,9 +138,7 @@ hr {
 
 .movieList {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.1%;
   margin-top: 15px;
 }
 

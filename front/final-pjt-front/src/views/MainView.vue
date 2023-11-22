@@ -66,6 +66,10 @@ const goDetail = function (movieId) {
   margin-top: 1%;
 }
 
+.main-main h1 {
+  margin-left: 1.5%;
+}
+
 /* 캐러셀 기본 설정 */
 .carouselSize {
 	height: 50vh;

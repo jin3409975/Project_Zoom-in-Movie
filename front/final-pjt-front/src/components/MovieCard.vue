@@ -29,7 +29,7 @@ const goDetail = function () {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease-in-out;
-    margin-bottom: 5%;
+    margin: 0 1.5% 5%;
 }
 
 .movie-card:hover {

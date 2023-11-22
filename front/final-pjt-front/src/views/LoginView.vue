@@ -1,11 +1,27 @@
 <template>
-    <div class="background backSize">
+    <div class="background backSize" :style="{ backgroundImage: `url(${backUrl})` }">
         <Login class="loginComponent"/>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { random } from 'lodash'
 import Login from '../components/Login.vue'
+import { useMovieStore } from '../stores/movie';
+
+const movieStore = useMovieStore()
+
+movieStore.getPopularMovies()
+
+const backUrl = ref(movieStore.movies[random(0, 5)].backdrop_path)
+
+if (backUrl) {
+    backUrl.value = `https://image.tmdb.org/t/p/original${backUrl.value}`
+} else {
+    backUrl.value = 'https://an2-img.amz.wtchn.net/image/v2/v_rtGmsGmmSGuScg0hC76g.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZNE5Ea3hOVGN4T1RJM05UQTVOVGs0TXlKOS5mRjlhcmYwZWNJd2cyNUl4YnBfZkZyV0E5UmpkMnhLdmVEUnhUUU1jUXN3'
+}
+// console.log(backUrl.value)
 
 </script>
 
@@ -16,7 +32,6 @@ import Login from '../components/Login.vue'
 }
 .background {
     position: relative;
-    background-image: url(https://an2-img.amz.wtchn.net/image/v2/v_rtGmsGmmSGuScg0hC76g.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZNE5Ea3hOVGN4T1RJM05UQTVOVGs0TXlKOS5mRjlhcmYwZWNJd2cyNUl4YnBfZkZyV0E5UmpkMnhLdmVEUnhUUU1jUXN3);
     background-size: cover;
     background-position: center;
     display: flex;
