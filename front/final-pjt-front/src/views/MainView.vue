@@ -1,114 +1,99 @@
 <template>
-  <div class="mainBackColor backSize">
-    <!-- 케러셀 -->
-    <div class="carouselSize">
-      <div id="carouselExampleIndicators" class="carousel slide marginMid" data-bs-ride="carousel">
-        <!-- 아래 버튼 -->
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button v-for="i in 4" type="button" data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="i" :aria-label="`Slide ${i + 1}`"></button>
-        </div>
-        <!-- 케루젤 이미지 -->
-        <div class="carousel-inner marginMid">
-          <div class="carousel-item active" data-bs-interval="3000">
-            <img @click="goDetail(store.movies[0].movie_id)" :src="`https://image.tmdb.org/t/p/original${store.movies[0]?.backdrop_path}`" class="d-block w-100 rounded" alt="#">
-          </div>
-          <div v-for="i in 4" class="carousel-item" data-bs-interval="3000">
-            <img @click="goDetail(store.movies[i].movie_id)" :src="`https://image.tmdb.org/t/p/original${store.movies[i]?.backdrop_path}`" class="d-block w-100 rounded" alt="#">
-          </div>
-        </div>
-        <!-- 좌우 버튼 -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+  <div class="mainBackColor backSize side-padding-zero-important main-place">
+    <div class="typing-place">
+      <img :src="backUrl" alt="#">
+      <AboutView class="typing" :movieTitle="backTitle" :idx="randomIdx"/>
     </div>
 
     <!-- 인기순 -->
     <div class="main-main">
       <h1 class="listTitle">일단넘겨 인기 콘텐츠</h1>
       <main class="movieList">
-        <MovieCard 
-        v-for="movie in store.movies" :key="movie.id" :movie="movie" 
-        class="movieCard"/>
+        <MovieCard
+         v-for="movie in movieStore.movies"
+         :key="movie.id"
+         :movie="movie"
+         class="movieCard"
+        />
       </main>
     </div>
-
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-import { useRouter } from 'vue-router';
+import { onMounted, ref } from 'vue'
+import { random } from 'lodash'
 import { useMovieStore } from '@/stores/movie.js'
 import MovieCard from '../components/MovieCard.vue'
-import YoutubeRelatedCard from '../components/YoutubeRelatedCard.vue';
+import AboutView from '../components/AboutView.vue'
 
-const store = useMovieStore()
-const router = useRouter()
+const movieStore = useMovieStore()
 
 onMounted(() => {
-  store.getPopularMovies()
+  movieStore.getPopularMovies()
 })
 
-const goDetail = function (movieId) {
-    router.push({ name: 'MovieDetailView', params: { movieId: movieId} })
+const randomIdx = ref(random(0, 5))
+const backMovie = ref(movieStore.movies[randomIdx.value])
+const backUrl = ref(backMovie.value.backdrop_path)
+const backTitle = ref(backMovie.value.title)
+
+if (backUrl) {
+    backUrl.value = `https://image.tmdb.org/t/p/original${backUrl.value}`
+} else {
+    backUrl.value = 'https://an2-img.amz.wtchn.net/image/v2/v_rtGmsGmmSGuScg0hC76g.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZNE5Ea3hOVGN4T1RJM05UQTVOVGs0TXlKOS5mRjlhcmYwZWNJd2cyNUl4YnBfZkZyV0E5UmpkMnhLdmVEUnhUUU1jUXN3'
 }
 </script>
 
 <style scoped>
+.main-place{
+  height: 100%;
+}
+
+.typing-place {
+  width: 100%;
+  max-height: 70vh;
+  position: relative;
+}
+.typing-place img {
+  position: relative;
+  width: 100%;
+  max-height: 70vh;
+  overflow: hidden;
+  background-position: center;
+  z-index: 0;
+}
+
+.typing-place::before {
+  content: '';
+  background-image: linear-gradient(to top, #141414, transparent);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.typing {
+  position: absolute;
+  top: 90%; /* 상위 요소의 중앙에 위치하도록 top 값을 50%로 설정 */
+  left: 50%; /* 상위 요소의 중앙에 위치하도록 left 값을 50%로 설정 */
+  transform: translate(-50%, -50%); /* 자신의 크기의 절반만큼 오프셋을 줘서 완벽하게 중앙에 배치 */
+  z-index: 2; /* 이미지 위에 오도록 z-index 설정 */
+  color: white; /* 텍스트 색상을 흰색으로 설정 */
+  text-align: center; /* 텍스트를 가운데 정렬 */
+  width: 100%; /* 가로 전체를 사용하도록 설정 */
+}
+
+
 .main-main {
-  margin-top: 1%;
+  padding: 0 3.5%;
 }
 
 .main-main h1 {
   margin-left: 1.5%;
-}
-
-/* 캐러셀 기본 설정 */
-.carouselSize {
-	height: 50vh;
-	max-width: 900px;
-	width: auto;
-  top: 1px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.carousel-inner, .carousel {
-  overflow: hidden;
-	width: 100%;
-}
-
-/* 캐러셀 아이템 설정 */
-.carousel-item {
-	height: 50vh;
-	width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.5s ease;
-}
-
-/* 캐러셀 이미지 설정 */
-.carousel-item img {
-	height: 100%;
-	width: auto;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.carousel-item img:hover {
-  cursor: pointer;
-}
-
-.carousel-item:hover {
-    transform: rotate(10deg) scale(1.1) translateX(5px);
-    transition: transform 0.3s ease;
-    /* transform: scale(1.05); */
 }
 </style>

@@ -104,6 +104,11 @@ onMounted(() => {
   word-break: keep-all;
 }
 
+.side-padding-zero-important {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 hr {
   margin: 0 auto;
   border-color: white;
@@ -111,7 +116,7 @@ hr {
 }
 
 .backSize {
-  margin: 7vh 0 0;
+  margin: 7v 0 0 0;
   height: 100%;
   min-height: 93vh;
   padding: 0 3.5%;

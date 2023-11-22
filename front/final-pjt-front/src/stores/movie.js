@@ -234,7 +234,7 @@ export const useMovieStore = defineStore('counter', () => {
       }
     })
       .then((res) =>{
-        console.log(res.data)
+        // console.log(res.data)
         recommendMovies.value = res.data
       })
       .catch((err) => {
