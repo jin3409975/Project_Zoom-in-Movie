@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <header>
+    <header :class="{ 'nav-hidden': !navVisible }">
       <nav class="nav">
         <div>
           <RouterLink :to="{ name: 'MainView' }"><img src="@/assets/logo.png" class="logo" alt="logo"></RouterLink>
@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useMovieStore } from '@/stores/movie.js'
 import { RouterLink, RouterView } from 'vue-router'
 import ProFile from './components/ProFile.vue'
@@ -61,6 +61,30 @@ onMounted(() => {
   }
 })
 
+
+// nav bar 스크롤 내리면 사라지게
+const navVisible = ref(true);
+
+const handleScroll = () => {
+  const st = window.pageYOffset || document.documentElement.scrollTop
+
+  if (st > 0) {
+    // 아래로 스크롤
+    navVisible.value = false
+  } else {
+    // 위로 스크롤
+    navVisible.value = true
+  }
+  lastScrollTop.value = st
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+})
 
 </script>
 
@@ -158,6 +182,12 @@ hr {
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.nav-hidden {
+  transform: translateY(-100%); /* 네비게이션 바를 위로 숨김 */
+  transition: transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
+}
+
 
 /* 네비게이션 내부 div 설정 */
 nav div {
