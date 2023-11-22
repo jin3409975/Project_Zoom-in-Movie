@@ -5,7 +5,7 @@
 
 		<div>
 			<div class="commentMain">
-				<div class="commentTitle">{{ store.user.username }}: </div>
+				<div class="commentTitle">{{ writer }}: </div>
 				<form @submit.prevent="updateComment" class="updateForm">
 					<textarea class="commentContent" v-model.trim="content" name="content" id="content"></textarea>
 					<button v-if="isLoginUserComment" class="commentBtn">수정</button>
@@ -21,7 +21,7 @@
 		
 		<div>
 			<div class="commentMain">
-				<div class="commentTitle">{{ store.user }}: </div>
+				<div class="commentTitle">{{ writer }}: </div>
 				<div class="commentContent">{{ comment.content }}</div>
 			</div>
 			<button v-if="isLoginUserComment" class="commentBtn" @click="isUpdate">수정</button>
@@ -30,8 +30,7 @@
 	</div>
 </template>
 <script setup>
-import { onMounted, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, watch, onMounted } from 'vue';
 import { useCounterStore } from '../stores/account'; 
 import { useMovieStore } from '../stores/movie';
 
@@ -41,18 +40,11 @@ const props = defineProps({
 
 
 const store = useCounterStore()
-const router = useRouter()
 const movieStore = useMovieStore()
 const isEdit = ref(false)
 const content = ref(props.comment.content)
-const username = ref('')
-
-onMounted(store.findUser(props.comment.user))
-
-console.log(store.user)
-
-
-const isLoginUserComment = store.loginUser.id === props.comment.user
+const writer = ref(props.comment.user.username)
+const isLoginUserComment = ref(store.loginUser.id === props.comment.user.id)
 
 const isUpdate = function () {
 	isEdit.value = !isEdit.value
@@ -61,6 +53,7 @@ const isUpdate = function () {
 watch(movieStore.comments, (newComments) => {
 	movieStore.comments = newComments
 })
+
 
 const deleteComment = function () {
 	movieStore.deleteComment(props.comment?.id)

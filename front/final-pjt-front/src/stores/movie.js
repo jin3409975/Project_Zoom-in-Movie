@@ -137,7 +137,7 @@ export const useMovieStore = defineStore('counter', () => {
       }
     })
       .then((res) =>{
-        console.log(res.data)
+        // console.log(res.data)
         comments.value.unshift(res.data)
       })
       .catch((err) => {

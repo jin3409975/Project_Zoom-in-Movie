@@ -22,12 +22,14 @@ class MovieSerializer(serializers.ModelSerializer):
 class CommentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
+        depth = 1
         fields = '__all__'
 
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
+        depth = 1
         fields = '__all__'
         read_only_fields = ('movie', 'user',)
         
