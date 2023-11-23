@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router';
 import { random } from 'lodash'
 import { useMovieStore } from '@/stores/movie.js'
@@ -88,14 +88,14 @@ const goDetail = function (movieId) {
 
 .typing {
   position: absolute;
-  top: 65%; /* 상위 요소의 중앙에 위치하도록 top 값을 50%로 설정 */
-  left: 50%; /* 상위 요소의 중앙에 위치하도록 left 값을 50%로 설정 */
-  transform: translate(-50%, -50%); /* 자신의 크기의 절반만큼 오프셋을 줘서 완벽하게 중앙에 배치 */
-  z-index: 2; /* 이미지 위에 오도록 z-index 설정 */
-  color: white; /* 텍스트 색상을 흰색으로 설정 */
-  text-align: center; /* 텍스트를 가운데 정렬 */
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: white;
+  text-align: center;
   pointer-events: none;
-  width: 100%; /* 가로 전체를 사용하도록 설정 */
+  width: 100%;
 }
 
 

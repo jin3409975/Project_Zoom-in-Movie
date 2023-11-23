@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { onMounted, watch, ref } from 'vue'
+import { watch, ref } from 'vue'
 import { useMovieStore } from '@/stores/movie.js'
 
 const movieStore = useMovieStore()
