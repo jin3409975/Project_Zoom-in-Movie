@@ -61,6 +61,7 @@ input::placeholder {
 }
 
 form button {
+  width: 110px;
   display: block;
   margin: 0 0 0 auto;
   padding: 10px 20px;

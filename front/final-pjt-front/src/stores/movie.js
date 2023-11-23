@@ -1,6 +1,5 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { useCounterStore } from './account'
 
@@ -58,7 +57,7 @@ export const useMovieStore = defineStore('counter', () => {
       });
       // console.log(res.data);
       movie.value = res.data;
-      genre.value = movie.value.genres.map((genreId) => {
+      genre.value = await movie.value.genres.map((genreId) => {
         return genres.value.filter(g => g.genre_id === genreId)[0].genre_name;
       });
     } catch (err) {

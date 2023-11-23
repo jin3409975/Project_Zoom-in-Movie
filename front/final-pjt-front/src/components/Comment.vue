@@ -7,7 +7,7 @@
 			<div class="commentMain">
 				<div class="commentTitle">{{ writer }}: </div>
 				<form @submit.prevent="updateComment" class="updateForm">
-					<textarea class="commentContent" v-model.trim="content" name="content" id="content"></textarea>
+					<input class="commentContent" v-model.trim="content" name="content" id="content">
 					<button v-if="isLoginUserComment" class="commentBtn leftBtn">수정</button>
 					<button class="commentBtn rightBtn" @click="isEdit=!isEdit">취소</button>
 				</form>
@@ -24,8 +24,10 @@
 				<div class="commentTitle">{{ writer }}: </div>
 				<div class="commentContent">{{ comment.content }}</div>
 			</div>
-			<button v-if="isLoginUserComment" class="commentBtn leftBtn" @click="isUpdate">수정</button>
-			<button v-if="isLoginUserComment" class="commentBtn rightBtn" @click="deleteComment">삭제</button>
+			<div class="comment-btn-div">
+				<button v-if="isLoginUserComment" class="commentBtn leftBtn" @click="isUpdate">수정</button>
+				<button v-if="isLoginUserComment" class="commentBtn rightBtn" @click="deleteComment">삭제</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -82,15 +84,21 @@ const updateComment = function () {
 	align-items: start;
 }
 
-.commentPlace div {
-	display: flex;
+.commentPlace > div {
 	width: 100%;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
 .commentMain {
-	flex-direction: column;
+	width: 100%;
+}
+
+.comment-btn-div {
+	width: 110px;
+	display: flex;
+	justify-content: end;
 }
 
 .commentTitle {
@@ -108,7 +116,7 @@ const updateComment = function () {
 
 .commentBtn {
 	height: 30px;
-	width: 60px;
+	width: 55px;
 	color: white;
 	border: none;
 	cursor: pointer;
@@ -139,7 +147,7 @@ const updateComment = function () {
 	width: 100%;
 }
 
-.updateForm textarea {
+.updateForm input {
   background: none;
   border: 1px solid white;
   width: 100%;
@@ -151,7 +159,7 @@ const updateComment = function () {
   border-radius: 5px;
 }
 
-textarea::placeholder {
+input::placeholder {
   white-space: pre-line;
   opacity: 0.5;
   font-size: 15px;

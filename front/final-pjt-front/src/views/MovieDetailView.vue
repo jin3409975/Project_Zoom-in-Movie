@@ -58,20 +58,20 @@ const comments = computed(() => {
 	return movieStore.comments
 })
 
-// 영화 및 댓글
-watch(() => route.params.movieId, (newMovieId) => {
+// 영화
+watch(() => route.params, (newParams) => {
 	window.scrollTo(0, 0);
-  movieStore.getMovie(newMovieId);
-  movieStore.getComments(newMovieId);
+	movieStore.getMovie(newParams.movieId);
+	movieStore.getComments(newParams.movieId);
 }, { immediate: true });
 
+// 댓글
 watch(movieStore.comments, (newComments) => {
 	movieStore.comments = newComments
 })
 </script>
   
 <style scoped>
-
 .commentsPlace {
 	margin: 20px 5% 0;
 	width: 80%;

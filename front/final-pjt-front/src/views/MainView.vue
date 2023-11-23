@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router';
 import { random } from 'lodash'
 import { useMovieStore } from '@/stores/movie.js'
@@ -34,22 +34,20 @@ const router = useRouter()
 const movieStore = useMovieStore()
 
 const randomIdx = ref(random(0, 5))
-const backMovie = ref(movieStore.popularMovies[randomIdx.value])
-const backUrl = ref(backMovie.value.backdrop_path)
-const backTitle = ref(backMovie.value.title)
+const backMovie = movieStore.popularMovies[randomIdx.value]
+let backUrl = `https://image.tmdb.org/t/p/original${backMovie.backdrop_path}`
+let backTitle = backMovie.title
 
 onMounted(() => {
   movieStore.getPopularMovies()
 })
 
+// watch(backMovie.value, (newBackMovie) => {
+//   backMovie.value = newBackMovie
+// }, { immediate: true })
+
 const goDetail = function (movieId) {
     router.push({ name: 'MovieDetailView', params: { movieId: movieId} })
-}
-
-if (backUrl) {
-    backUrl.value = `https://image.tmdb.org/t/p/original${backUrl.value}`
-} else {
-    backUrl.value = 'https://an2-img.amz.wtchn.net/image/v2/v_rtGmsGmmSGuScg0hC76g.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZNE5Ea3hOVGN4T1RJM05UQTVOVGs0TXlKOS5mRjlhcmYwZWNJd2cyNUl4YnBfZkZyV0E5UmpkMnhLdmVEUnhUUU1jUXN3'
 }
 </script>
 

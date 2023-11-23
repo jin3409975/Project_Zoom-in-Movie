@@ -12,7 +12,6 @@ const props = defineProps({
     movie: Object,
 })
 
-const path = props.movie.backdrop_path
 const poster_path = props.movie.poster_path
 const img_url = `https://image.tmdb.org/t/p/original${poster_path}`
 
