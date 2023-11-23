@@ -27,13 +27,6 @@
           <RouterLink :to="{ name: 'SignUpView' }">signup</RouterLink>
           <RouterLink :to="{ name: 'LoginView' }">login</RouterLink>
         </div>
-        <!-- 준비중 -->
-        <div v-if="false">
-          <RouterLink :to="{ name: 'MyPageView' }">mypage</RouterLink>
-          <ProFile/>
-          <!-- 사실 사용자에게 메뉴로 노출되면 안 됨. -->
-          <RouterLink :to="{ name: 'RecommendChoiceView' }">choice</RouterLink>
-        </div>
       </nav>
     </header>
 

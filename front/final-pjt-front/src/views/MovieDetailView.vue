@@ -31,12 +31,6 @@
 					 />
 				</div>
 			</div>
-			<div v-if="false">
-				<h1 class="listTitle">유튜브 관련 영상</h1>
-				<div class="movieList">
-					<YoutubeRelatedCard v-for="i in 20"/>
-				</div>
-			</div>
 		</div>
     <Footer/>
 	</div>
