@@ -137,6 +137,7 @@ hr {
   font-weight: bold;
   margin: 0;
   padding: 30px 30px 0 0;
+  margin-left: 1.5%;
 }
 
 .movieList {
