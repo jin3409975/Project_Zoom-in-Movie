@@ -46,7 +46,6 @@
 import { onMounted, onUnmounted, ref  } from 'vue';
 import { useMovieStore } from '@/stores/movie.js'
 import { RouterLink, RouterView } from 'vue-router'
-import ProFile from './components/ProFile.vue'
 import { useCounterStore } from '@/stores/account.js'
 
 const store = useCounterStore()
