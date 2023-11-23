@@ -1,13 +1,15 @@
 <template>
   <div class="mainBackColor backSize side-padding-zero-important main-place">
+    <h1 id="backTitle" @click="goDetail(backMovie.movie_id)">{{ backTitle }}</h1>
     <div class="typing-place">
       <img @click="goDetail(backMovie.movie_id)" :src="backUrl" alt="#">
       <AboutView class="typing" :movieTitle="backTitle" :idx="randomIdx"/>
+      <Scroll/>
     </div>
 
     <!-- 인기순 -->
     <div class="main-main">
-      <h1 class="listTitle">일단넘겨 인기 콘텐츠</h1>
+      <h1 class="listTitle">ZnMovie 인기 콘텐츠</h1>
       <main class="movieList">
         <MovieCard
          v-for="movie in movieStore.popularMovies"
@@ -22,30 +24,26 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router';
 import { random } from 'lodash'
 import { useMovieStore } from '@/stores/movie.js'
 import MovieCard from '../components/MovieCard.vue'
 import AboutView from '../components/AboutView.vue'
 import Footer from '../components/Footer.vue';
+import Scroll from '@/components/Scroll.vue'
 
 const router = useRouter()
 const movieStore = useMovieStore()
 
-watch(() => {
+watchEffect(() => {
   movieStore.getPopularMovies()
-}, { immediate:true })
+})
 
 const randomIdx = ref(random(0, 5))
 const backMovie = movieStore.popularMovies[randomIdx.value]
 const backUrl = `https://image.tmdb.org/t/p/original${backMovie.backdrop_path}`
 const backTitle = backMovie.title
-
-
-// watch(backMovie.value, (newBackMovie) => {
-//   backMovie.value = newBackMovie
-// }, { immediate: true })
 
 const goDetail = function (movieId) {
     router.push({ name: 'MovieDetailView', params: { movieId: movieId} })
@@ -53,6 +51,25 @@ const goDetail = function (movieId) {
 </script>
 
 <style scoped>
+#backTitle {
+  position: absolute;
+  color: white;
+  z-index: 99999999999999999;
+  left: 50%;
+  top: -3.5%;
+  transform: translate(-50%, -50%);
+  font-family: fantasy;
+  font-size: 40px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 1400px) {
+  #backTitle {
+    display: none;
+ }
+}
+
 .main-place{
   position: relative;
   height: 100%;
@@ -88,7 +105,7 @@ const goDetail = function (movieId) {
 
 .typing {
   position: absolute;
-  top: 65%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -103,7 +120,7 @@ const goDetail = function (movieId) {
   padding: 0 3.5%;
   z-index: 1;
   position: absolute;
-  margin-top: 40%;
+  margin-top: 45%;
 }
 
 .main-main h1 {

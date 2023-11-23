@@ -5,6 +5,7 @@ import SignUpView from '@/views/SignUpView.vue'
 import MovieDetailView from '@/views/MovieDetailView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RecommendView from '@/views/RecommendView.vue'
+import PageNotFoundView from '@/views/PageNotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,16 +40,18 @@ const router = createRouter({
       name: 'RecommendView',
       component: RecommendView
     },
-    // {
-    //   path: '/mypage',
-    //   name: 'MyPageView',
-    //   component: MyPageView
-    // },
-    // {
-    //   path: '/choice',
-    //   name: 'RecommendChoiceView',
-    //   component: RecommendChoiceView
-    // },
+    {
+      path: '/404',
+      name: 'PageNotFoundView',
+      component: PageNotFoundView,
+      meta: {
+        title: "PageNotFound",
+      },
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: "/404",
+    },
   ],
   scrollBehavior() {
     // 페이지 전환 시 스크롤을 맨 위로 이동

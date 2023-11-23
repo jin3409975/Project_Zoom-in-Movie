@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
           <div class="text-center mx-auto my-auto">
             <h1 class="text-white">
-              <h1 class="text-white">{{ movieTitle }}</h1>
+              <h1 class="text-white" id="movieTitle">{{ movieTitle }}</h1>
               <span class="text-white" id="typed"></span>
             </h1>
             <div id="typed-strings">
@@ -60,10 +60,19 @@ onMounted(() => {
 <style scoped>
 h1 > h1 {
   font-family: fantasy;
-  font-weight: 800;
+  font-size: 40px;
+  font-weight: 600;
+  top: 0;
+}
+
+@media (min-width: 1400px) {
+  #movieTitle {
+    display: none;
+ }
 }
 
 #typed {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 40px;
 }
 </style>

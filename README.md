@@ -301,7 +301,18 @@ button:hover {
 }
 ```
 
-6. 유튜브 영상 컴포넌트 - final-pjt-front\src\components\YoutubeTrailer.vue를 참고하라.
+6. 유튜브 영상 컴포넌트 - final-pjt-front\src\components\YoutubeTrailer.vue
+
+7. 스크롤 유도 표시 컴포넌트 - final-pjt-front\src\components\Scroll.vue
+
+8. 화면 크기에 따른 CSS 조건
+```CSS
+@media (min-width: 1400px) {
+  #movieTitle {
+    display: none;
+ }
+}
+```
     
 <br>
 <br>

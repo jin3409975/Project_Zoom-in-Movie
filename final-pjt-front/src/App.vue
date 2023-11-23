@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <!-- <header :class="{ 'nav-hidden': !navVisible }"> -->
     <header>
       <nav class="nav" :class="{ 'nav-hidden': !navVisible }">
         <div>
@@ -20,6 +19,7 @@
         </div>
         <!-- 로그인 상태에서 보이는 메뉴 -->
         <div v-if="store.isLogin">
+          <a href="#" onclick="alert('준비 중입니다.')">My Page</a>
           <a href="#" @click.prevent="store.logOut">logout</a>
         </div>
         <!-- 로그아웃 상태에서 보이는 메뉴 -->
