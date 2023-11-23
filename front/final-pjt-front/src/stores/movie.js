@@ -10,6 +10,7 @@ export const useMovieStore = defineStore('counter', () => {
   const accountStore = useCounterStore()
   const movie = ref([])
   const movies = ref([])
+  const popularMovies = ref([])
   const recommendMovies = ref([])
   const genre = ref([])
   const genres = ref([])
@@ -73,7 +74,7 @@ export const useMovieStore = defineStore('counter', () => {
     })
       .then((res) =>{
         // console.log(res.data)
-        movies.value = res.data
+        popularMovies.value = res.data
       })
       .catch((err) => {
         console.log(err)
@@ -242,6 +243,7 @@ export const useMovieStore = defineStore('counter', () => {
       })
   }
   return { movie, movies, genre, genres, comment, comments, isLiked, recommendMovies,
+    popularMovies, 
     getMovies, getMovie, getPopularMovies, getGenres, getGenreMovie,
     getComments, deleteComment, createComment, updateComment, updateLikeMovie,
     checkLikeMovie, movieRecommend,

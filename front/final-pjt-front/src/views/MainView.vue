@@ -10,7 +10,7 @@
       <h1 class="listTitle">일단넘겨 인기 콘텐츠</h1>
       <main class="movieList">
         <MovieCard
-         v-for="movie in movieStore.movies"
+         v-for="movie in movieStore.popularMovies"
          :key="movie.id"
          :movie="movie"
          class="movieCard"
@@ -32,7 +32,7 @@ const router = useRouter()
 const movieStore = useMovieStore()
 
 const randomIdx = ref(random(0, 5))
-const backMovie = ref(movieStore.movies[randomIdx.value])
+const backMovie = ref(movieStore.popularMovies[randomIdx.value])
 const backUrl = ref(backMovie.value.backdrop_path)
 const backTitle = ref(backMovie.value.title)
 
