@@ -4,6 +4,31 @@
 <br>
 <br>
 
+# 0. 미리보기
+<br>
+
+## 0 - 1. MainPage
+![Alt text](README_data/MainView.gif)
+<br>
+
+## 0 - 2. DetailPage
+![Alt text](README_data/DetailView.gif)
+<br>
+
+## 0 - 3. RecommendPage and CategoryPage
+![Alt text](<README_data/RecommendView and CategoryView.gif>)
+<br>
+
+## 0 - 4. AccountsPage
+![Alt text](README_data/AccountsView.gif)
+<br>
+
+## 0 - 5. PageNotFountPage
+![Alt text](README_data/PageNotFoundView.gif)
+
+<br>
+<br>
+
 # 1. 팀원 정보 및 업무 분담 내역
 <br>
 
@@ -115,12 +140,10 @@
 
 # 3. 데이터베이스 모델링 (ERD)
 ## ERD
-![Alt text](ERD.png)
-
+![Alt text](README_data/ERD.png)
 
 ## Component 구조도
-
-![Alt text](<Component 구조도.png>)
+![Alt text](<README_data/Component 구조도.png>)
 
 <br>
 
