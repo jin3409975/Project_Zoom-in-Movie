@@ -2,7 +2,7 @@
   <div class="app">
     <!-- <header :class="{ 'nav-hidden': !navVisible }"> -->
     <header>
-      <nav class="nav">
+      <nav class="nav" :class="{ 'nav-hidden': !navVisible }">
         <div>
           <RouterLink :to="{ name: 'MainView' }"><img src="@/assets/logo.png" class="logo" alt="logo"></RouterLink>
           <RouterLink :to="{ name: 'RecommendView' }">나만의 영화추천</RouterLink>
@@ -38,16 +38,12 @@
     </header>
 
     <RouterView class="router-view"/>
-    <footer class='footer'>
-      고객센터(이용 및 결제 문의)  ssafy10th@ssafy.com • 02-1234-5678 (유료) / 제휴 및 대외 협력  https://ssafy.com
-      <br>
-      주식회사 일단넘겨 / 대전광역시 유성구 덕명동 124 유성연수원 / 이용약관 / 개인정보 처리 방침 / 청소년 보호정책
-    </footer>
+
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref  } from 'vue';
 import { useMovieStore } from '@/stores/movie.js'
 import { RouterLink, RouterView } from 'vue-router'
 import ProFile from './components/ProFile.vue'
@@ -62,36 +58,46 @@ onMounted(() => {
   }
 })
 
+// nav bar 스크롤 내리면 사라지고 살짝 올리면 나타나게
+const navVisible = ref(true);
+let lastScrollTop = 0; // 마지막 스크롤 위치를 저장할 변수
 
-// // nav bar 스크롤 내리면 사라지게
-// const navVisible = ref(true);
+const handleScroll = () => {
+  const st = window.pageYOffset || document.documentElement.pageYOffset;
 
-// const handleScroll = () => {
-//   const st = window.pageYOffset || document.documentElement.scrollTop
+  if (st > lastScrollTop) {
+    // 아래로 스크롤
+    navVisible.value = false;
+  } else {
+    // 위로 스크롤
+    navVisible.value = true;
+  }
+  lastScrollTop = st <= 0 ? 0 : st; // 음수가 되지 않도록
+};
 
-//   if (st > 0) {
-//     // 아래로 스크롤
-//     navVisible.value = false
-//   } else {
-//     // 위로 스크롤
-//     navVisible.value = true
-//   }
-//   lastScrollTop.value = st
-// }
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
 
-// onMounted(() => {
-//   window.addEventListener('scroll', handleScroll);
-// })
-
-// onUnmounted(() => {
-//   window.removeEventListener('scroll', handleScroll);
-// })
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 
 </script>
 
 
 <!-- 전역 스타일 -->
 <style>
+.nav-hidden {
+  transform: translateY(-100%); 
+  /* transition: transform 0.3s ease-in-out;  */
+}
+
+.sticky {
+  position: sticky !important;
+  top: 0;
+}
+
 .commentProfile {
   width: 35px;
   height: 35px;
@@ -154,7 +160,6 @@ hr {
 .marginMid {
   margin: 0 auto;
 }
-
 </style>
 
 <!-- 스코프 스타일 -->
@@ -184,13 +189,8 @@ hr {
   width: 100%;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
-
-/* .nav-hidden {
-  transform: translateY(-100%); 
-  transition: transform 0.3s ease-in-out; 
-} */
-
 
 /* 네비게이션 내부 div 설정 */
 nav div {
@@ -264,23 +264,8 @@ nav a:hover {
 /* 라우터 뷰 마진 설정 */
 .router-view {
   margin-top: 7vh;
-  padding-bottom: 8vh;
 }
 
-/* 푸터 스타일 설정 */
-.footer {
-  position: absolute;
-  box-sizing: border-box;
-  padding: 0;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 20px 0;
-  font-size: 14px;
-  bottom: 0;
-  width: 100%;
-  height: 8vh;
-  opacity: 0.5;
-  background-color: transparent;
-}
+
 
 </style>

@@ -38,6 +38,7 @@
 				</div>
 			</div>
 		</div>
+    <Footer/>
 	</div>
 </template>
 
@@ -50,6 +51,7 @@ import CommentCreate from '@/components/CommentCreate.Vue'
 import YoutubeRelatedCard from '@/components/YoutubeRelatedCard.vue'
 import YoutubeTrailer from '@/components/YoutubeTrailer.vue'
 import LikeBtn from '../components/LikeBtn.vue';
+import Footer from '../components/Footer.vue';
 
 const route = useRoute()
 const movieStore = useMovieStore()

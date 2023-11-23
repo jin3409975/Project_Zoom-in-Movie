@@ -7,6 +7,7 @@
                 :key="movie.id" :movie="movie" 
                 class="movieCard"/>
         </main>
+        <Footer/>
     </div>
 </template>
 
@@ -15,6 +16,7 @@ import { watch } from 'vue';
 import MovieCard from '../components/MovieCard.vue';
 import { useCounterStore } from '../stores/account';
 import { useMovieStore } from '../stores/movie';
+import Footer from '../components/Footer.vue';
 
 const store = useCounterStore()
 const movieStore = useMovieStore()
@@ -25,10 +27,6 @@ movieStore.movieRecommend()
 watch(() => movieStore.recommendMovies, (newRecommendMovies) => {
     movieStore.recommendMovies = newRecommendMovies
 }, { immediate: true })
-
-
-
-
 </script>
 
 <style scoped>

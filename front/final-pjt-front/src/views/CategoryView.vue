@@ -6,6 +6,7 @@
                 v-for="movie in store.movies" :key="movie.id" :movie="movie" 
                 class="movieCard"/>
         </main>
+        <Footer/>
     </div>
 </template>
 
@@ -14,6 +15,7 @@ import { onMounted, watch, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useMovieStore } from '../stores/movie';
 import MovieCard from '../components/MovieCard.vue';
+import Footer from '../components/Footer.vue';
 
 const route = useRoute()
 const store = useMovieStore()

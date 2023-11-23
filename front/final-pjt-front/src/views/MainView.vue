@@ -16,6 +16,7 @@
          class="movieCard"
         />
       </main>
+      <Footer/>
     </div>
   </div>
 </template>
@@ -27,6 +28,7 @@ import { random } from 'lodash'
 import { useMovieStore } from '@/stores/movie.js'
 import MovieCard from '../components/MovieCard.vue'
 import AboutView from '../components/AboutView.vue'
+import Footer from '../components/Footer.vue';
 
 const router = useRouter()
 const movieStore = useMovieStore()
@@ -53,18 +55,19 @@ if (backUrl) {
 
 <style scoped>
 .main-place{
+  position: relative;
   height: 100%;
 }
 
 .typing-place {
   width: 100%;
-  max-height: 70vh;
-  position: relative;
+  position: absolute;
+  z-index: 0;
 }
 .typing-place img {
   position: relative;
   width: 100%;
-  max-height: 70vh;
+  max-height: 100%;
   overflow: hidden;
   background-position: center;
   z-index: 0;
@@ -86,7 +89,7 @@ if (backUrl) {
 
 .typing {
   position: absolute;
-  top: 90%; /* 상위 요소의 중앙에 위치하도록 top 값을 50%로 설정 */
+  top: 65%; /* 상위 요소의 중앙에 위치하도록 top 값을 50%로 설정 */
   left: 50%; /* 상위 요소의 중앙에 위치하도록 left 값을 50%로 설정 */
   transform: translate(-50%, -50%); /* 자신의 크기의 절반만큼 오프셋을 줘서 완벽하게 중앙에 배치 */
   z-index: 2; /* 이미지 위에 오도록 z-index 설정 */
@@ -99,6 +102,9 @@ if (backUrl) {
 
 .main-main {
   padding: 0 3.5%;
+  z-index: 1;
+  position: absolute;
+  margin-top: 40%;
 }
 
 .main-main h1 {

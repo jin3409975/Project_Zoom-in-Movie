@@ -1,6 +1,7 @@
 <template>
     <div class="background backSize" :style="{ backgroundImage: `url(${backUrl})` }">
         <Login class="loginComponent"/>
+        <Footer/>
     </div>
 </template>
 
@@ -9,12 +10,13 @@ import { ref } from 'vue';
 import { random } from 'lodash'
 import Login from '../components/Login.vue'
 import { useMovieStore } from '../stores/movie';
+import Footer from '../components/Footer.vue';
 
 const movieStore = useMovieStore()
 
 movieStore.getPopularMovies()
 
-const backUrl = ref(movieStore.movies[random(0, 5)].backdrop_path)
+const backUrl = ref(movieStore.popularMovies[random(0, 5)].backdrop_path)
 
 if (backUrl) {
     backUrl.value = `https://image.tmdb.org/t/p/original${backUrl.value}`
@@ -26,6 +28,9 @@ if (backUrl) {
 </script>
 
 <style scoped>
+.footer {
+    position: absolute;
+}
 .backSize {
   margin: 7vh 0 0 0;
   height: 93vh;
