@@ -1,7 +1,7 @@
 <template>
   <div class="mainBackColor backSize side-padding-zero-important main-place">
     <div class="typing-place">
-      <img :src="backUrl" alt="#">
+      <img @click="goDetail(backMovie.movie_id)" :src="backUrl" alt="#">
       <AboutView class="typing" :movieTitle="backTitle" :idx="randomIdx"/>
     </div>
 
@@ -22,21 +22,27 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router';
 import { random } from 'lodash'
 import { useMovieStore } from '@/stores/movie.js'
 import MovieCard from '../components/MovieCard.vue'
 import AboutView from '../components/AboutView.vue'
 
+const router = useRouter()
 const movieStore = useMovieStore()
-
-onMounted(() => {
-  movieStore.getPopularMovies()
-})
 
 const randomIdx = ref(random(0, 5))
 const backMovie = ref(movieStore.movies[randomIdx.value])
 const backUrl = ref(backMovie.value.backdrop_path)
 const backTitle = ref(backMovie.value.title)
+
+onMounted(() => {
+  movieStore.getPopularMovies()
+})
+
+const goDetail = function (movieId) {
+    router.push({ name: 'MovieDetailView', params: { movieId: movieId} })
+}
 
 if (backUrl) {
     backUrl.value = `https://image.tmdb.org/t/p/original${backUrl.value}`
@@ -62,6 +68,7 @@ if (backUrl) {
   overflow: hidden;
   background-position: center;
   z-index: 0;
+  cursor: pointer;
 }
 
 .typing-place::before {
@@ -73,8 +80,8 @@ if (backUrl) {
   right: 0;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   z-index: 1;
+  pointer-events: none;
 }
 
 .typing {
@@ -85,6 +92,7 @@ if (backUrl) {
   z-index: 2; /* 이미지 위에 오도록 z-index 설정 */
   color: white; /* 텍스트 색상을 흰색으로 설정 */
   text-align: center; /* 텍스트를 가운데 정렬 */
+  pointer-events: none;
   width: 100%; /* 가로 전체를 사용하도록 설정 */
 }
 
