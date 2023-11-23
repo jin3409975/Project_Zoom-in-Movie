@@ -1,9 +1,7 @@
 # 🔎 ZnMovie (2023.11.16 ~ 2023.11.24)
     Zoom in Movie
-<br>
 
 <br>
-
 <br>
 
 # 1. 팀원 정보 및 업무 분담 내역
@@ -115,11 +113,13 @@
 
 
 # 3. 데이터베이스 모델링 (ERD)
-<br>
-<br>
+## ERD
+![Alt text](ERD.png)
 
-![Alt text](ERD.drawio.png)
 
+## Component 구조도
+
+![Alt text](<Component 구조도.png>)
 
 <br>
 
