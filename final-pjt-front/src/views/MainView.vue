@@ -33,14 +33,15 @@ import Footer from '../components/Footer.vue';
 const router = useRouter()
 const movieStore = useMovieStore()
 
+watch(() => {
+  movieStore.getPopularMovies()
+}, { immediate:true })
+
 const randomIdx = ref(random(0, 5))
 const backMovie = movieStore.popularMovies[randomIdx.value]
-let backUrl = `https://image.tmdb.org/t/p/original${backMovie.backdrop_path}`
-let backTitle = backMovie.title
+const backUrl = `https://image.tmdb.org/t/p/original${backMovie.backdrop_path}`
+const backTitle = backMovie.title
 
-onMounted(() => {
-  movieStore.getPopularMovies()
-})
 
 // watch(backMovie.value, (newBackMovie) => {
 //   backMovie.value = newBackMovie

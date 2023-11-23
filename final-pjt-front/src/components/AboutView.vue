@@ -58,4 +58,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
+h1 > h1 {
+  font-family: fantasy;
+  font-weight: 800;
+}
+
+#typed {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
 </style>
