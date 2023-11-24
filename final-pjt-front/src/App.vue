@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref  } from 'vue';
+import { onMounted, onUnmounted, ref, watchEffect  } from 'vue';
 import { useMovieStore } from '@/stores/movie.js'
 import { RouterLink, RouterView } from 'vue-router'
 import { useCounterStore } from '@/stores/account.js'
@@ -44,7 +44,10 @@ import { useCounterStore } from '@/stores/account.js'
 const store = useCounterStore()
 const movieStore = useMovieStore()
 
-onMounted(() => {
+watchEffect(() => {
+  if (movieStore.popularMovies.length < 1) {
+    movieStore.getPopularMovies()
+  }
   if (movieStore.genres.length < 2) {
     movieStore.getGenres()
   }

@@ -32,16 +32,27 @@ import MovieCard from '../components/MovieCard.vue'
 import AboutView from '../components/AboutView.vue'
 import Footer from '../components/Footer.vue';
 import Scroll from '@/components/Scroll.vue'
+const defaultMovie = { 
+  actors: [],
+  adult: false,
+  backdrop_path: "/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg",
+  genres: (2) [18, 36],
+  id: 1,
+  movie_id: "872585",
+  original_title: "Oppenheimer",
+  overview: "세상을 구하기 위해 세상을 파괴할 지도 모르는 선택을 해야 하는 천재 과학자의 핵개발 프로젝트.",
+  popularity: 2718.643,
+  poster_path: "/4ZLnVUfiCe3wX8Ut9eyujndpyvA.jpg",
+  rating: 8.189,
+  release_date: "2023-07-19",
+  runtime: 181,
+  title: "오펜하이머" }
 
 const router = useRouter()
 const movieStore = useMovieStore()
 
-watchEffect(() => {
-  movieStore.getPopularMovies()
-})
-
 const randomIdx = ref(random(0, 5))
-const backMovie = movieStore.popularMovies[randomIdx.value]
+const backMovie = movieStore.popularMovies[randomIdx.value] || defaultMovie
 const backUrl = `https://image.tmdb.org/t/p/original${backMovie.backdrop_path}`
 const backTitle = backMovie.title
 
