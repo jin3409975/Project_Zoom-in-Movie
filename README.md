@@ -1,6 +1,9 @@
 # 🔎 ZnMovie (2023.11.16 ~ 2023.11.24)
     Zoom in Movie
 
+### \- SSAFY 1학기 우수 프로젝트
+![Alt text](README_data/testimonial.jpg)
+
 <br>
 <br>
 
