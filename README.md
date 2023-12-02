@@ -2,7 +2,7 @@
     Zoom in Movie
 
 ### \- SSAFY 1학기 우수 프로젝트
-![Alt text](README_data/testimonial.jpg)
+<img src="README_data/testimonial.jpg" width=60%>
 
 <br>
 <br>
@@ -11,23 +11,23 @@
 <br>
 
 ## 0 - 1. MainPage
-![Alt text](README_data/MainView.gif)
+<img src="README_data/MainView.gif" width=70%>
 <br>
 
 ## 0 - 2. DetailPage
-![Alt text](README_data/DetailView.gif)
+<img src="README_data/DetailView.gif" width=70%>
 <br>
 
 ## 0 - 3. RecommendPage and CategoryPage
-![Alt text](<README_data/RecommendView and CategoryView.gif>)
+<img src="README_data/RecommendView and CategoryView.gif" width=70%>
 <br>
 
 ## 0 - 4. AccountsPage
-![Alt text](README_data/AccountsView.gif)
+<img src="README_data/AccountsView.gif" width=70%>
 <br>
 
 ## 0 - 5. PageNotFountPage
-![Alt text](README_data/PageNotFoundView.gif)
+<img src="README_data/PageNotFoundView.gif" width=70%>
 
 <br>
 <br>
